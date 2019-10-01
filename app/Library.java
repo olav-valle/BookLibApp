@@ -80,7 +80,8 @@ public class Library
      * @param obj Object whose methods are to be called
      * @return
      */
-    public Object invokeAllMethods(Object obj) throws IllegalAccessException, InvocationTargetException
+    public Object invokeAllMethods(Object obj)
+            throws IllegalAccessException, InvocationTargetException
     {
         //Arrays.stream(methods).forEach(m -> System.out.println(m.invoke(obj)));
         Method[] met = obj.getClass().getDeclaredMethods();

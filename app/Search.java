@@ -24,7 +24,7 @@ public class Search
     /**
      * Constructor for objects of class Search
      */
-    public Search() throws IllegalAccessException, InvocationTargetException
+    public Search() //throws  IllegalAccessException, InvocationTargetException
     {
         book = new Book("title", "author", "publisher", "date", "pages", "ean13");
         // invokeAllMethods(book); 
