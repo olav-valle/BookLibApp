@@ -1,5 +1,5 @@
-import java.util.Iterator;
 import java.util.ArrayList;
+import java.util.Iterator;
 /**
 * The user interface of the book library application.
 * Presents the user with a CLI menu list of app functions.
@@ -76,7 +76,7 @@ public class BookLibApp
         //ArrayList<Book> libraryCollection = library.getCollection();
 	Iterator<Book> it = library.getIterator();
 
-        Book foundBook;
+		Book foundBook;
 	boolean matchFound = false;
 	
 	while(it.hasNext() && !matchFound) {    

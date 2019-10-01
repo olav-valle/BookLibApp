@@ -1,7 +1,3 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
 
@@ -52,15 +48,17 @@ public class Search
      * Obvious warning is that ANY method with "get" in name will be called,
      * even if it is not an accessor method.
      * @param obj Object whoose methods are to be called
+     * @return
      */
-    public void invokeAllMethods(Object obj) throws IllegalAccessException, InvocationTargetException
+    public static Object invokeAllMethods(Object obj) throws IllegalAccessException, InvocationTargetException
     {
         //Arrays.stream(methods).forEach(m -> System.out.println(m.invoke(obj)));
-        methods = obj.getClass().getDeclaredMethods();
-        for(Method m : methods) {
+        Method[] met = obj.getClass().getDeclaredMethods();
+        for(Method m : met) {
             if (m.getName().contains("get")) {
                 try {
-                    System.out.println(m.invoke(obj));
+                    return (m.invoke(obj));
+                    //System.out.println(m.invoke(obj));
                 } catch (InvocationTargetException e) {
                     System.out.println("InvocationTargetException : method being invoked probably threw an exception? I don't know...");
                     throw e;
@@ -70,5 +68,6 @@ public class Search
                 }
             }
         }
+        return obj;
     }
 }
