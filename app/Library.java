@@ -78,7 +78,7 @@ public class Library
      * Obvious warning is that ANY method with "get" in name will be called,
      * even if it is not an accessor method.
      * @param obj Object whose methods are to be called
-     * @return the object retuned by the methods that are invoked
+     * @return
      */
     public Object invokeAllMethods(Object obj) throws IllegalAccessException, InvocationTargetException
     {
@@ -101,6 +101,7 @@ public class Library
                 }
             }
         }
+        return obj;
     }
 
     /* The previous attempt. Can't deal with all the lambda exception handling bullshit...
