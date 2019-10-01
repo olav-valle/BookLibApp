@@ -1,7 +1,3 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
 
@@ -52,6 +48,7 @@ public class Search
      * Obvious warning is that ANY method with "get" in name will be called,
      * even if it is not an accessor method.
      * @param obj Object whoose methods are to be called
+     * @return
      */
     public static Object invokeAllMethods(Object obj) throws IllegalAccessException, InvocationTargetException
     {
@@ -71,5 +68,6 @@ public class Search
                 }
             }
         }
+        return obj;
     }
 }
