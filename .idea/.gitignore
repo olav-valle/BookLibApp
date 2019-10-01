@@ -1,3 +1,7 @@
-
+*.class
+*.bluej
+*.ctxt
+*.bak
+*.swp
 # Default ignored files
 /workspace.xml
