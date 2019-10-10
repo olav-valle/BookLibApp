@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Iterator;
 /**
 * The user interface of the book library application.
@@ -12,16 +11,16 @@ import java.util.Iterator;
 //TODO Move search functions and list functions to separate class
     //TODO alternative: handle search and list in the Library class 
 
-public class BookLibApp
+public class Interface
 {
-    private static BookLibApp app;
+    private static Interface app;
     private static InputReader reader;
     public Library library;
 
     /** 
     * Constructor
     */
-    public BookLibApp()
+    public Interface()
     {
 	reader = new InputReader();
 	library = new Library();

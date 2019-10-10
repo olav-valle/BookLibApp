@@ -2,7 +2,7 @@ public class AppMain
 {
         public static void main(String[] args)
         {
-            BookLibApp app = new BookLibApp();
+        Interface app = new Interface();
             app.init();
         }
 }
