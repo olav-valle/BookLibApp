@@ -28,17 +28,10 @@ public class BookLibApp
 	fillLibrary();
     }
 
-    public static void main(String[] args)
-    {
-	app = new BookLibApp();
-
-	app.init();
-    }
-
     /**
     * The user interface method. 
     */
-    private void init()
+	public void init()
     {
 	boolean exit = false;
 	
