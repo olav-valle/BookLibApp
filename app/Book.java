@@ -1,3 +1,5 @@
+import java.lang.reflect.Field;
+
 /**
  * A class that maintains information on a book.
  *
@@ -86,6 +88,19 @@ public class Book
         }
         return borrowedString;
     }
-    
+
+    /**
+     * Searches all instance fields for match against provided keyword.
+     * @return true if match was found, false if not
+     */
+    public boolean searchFields(String keyword)
+    {
+       boolean match = false;
+        Field[] fields = getClass().getDeclaredFields();
+        for (Field f : fields) {
+            if(f.get(this))
+        }
+       return match;
+    }
 
 }

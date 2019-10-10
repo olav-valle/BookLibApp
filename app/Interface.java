@@ -13,18 +13,16 @@ import java.util.Iterator;
 
 public class Interface
 {
-    private static Interface app;
-    private static InputReader reader;
-    public Library library;
+    private InputReader reader;
+    private Library library;
 
     /** 
     * Constructor
     */
     public Interface()
     {
-	reader = new InputReader();
-	library = new Library();
-	fillLibrary();
+		reader = new InputReader();
+		library = new Library();
     }
 
     /**
@@ -32,62 +30,29 @@ public class Interface
     */
 	public void init()
     {
-	boolean exit = false;
-	
-	fillLibrary();
-	
-	while(!exit)
-	{
-	    printWelcome();
-	    int userInput = reader.getIntInput();
-	    
-	    if(userInput == 4){
-		printFarewell();
-		exit = true;
-	    }
-	    else if(userInput == 1) {
-		//searchByTitle();
-		searchByAuthor();
-	    }
-	    else if(userInput == 3) {
-		listAllBooksIterator();
-	    }
-	}
+		boolean exit = false;
+
+
+		while(!exit)
+		{
+	    	printWelcome();
+			int userInput = reader.getIntInput();
+			//TODO replace with switch statement
+			if(userInput == 4){
+			printFarewell();
+			exit = true;
+			}
+			else if(userInput == 1) {
+			//searchByTitle();
+			searchByAuthor();
+			}
+			else if(userInput == 3) {
+			listAllBooksIterator();
+			}
+		}
     }
 
-    /**
-    * A search function. Requests input from user, gets book collection  
-    * object , and iterates through until a matching title is found. 
-    */
-    private void searchByTitle()
-    {
-	
-	System.out.println("##############################");
-	System.out.println("What is the title of the book you are searching for?");
 
-        //ArrayList<Book> libraryCollection = library.getCollection();
-	Iterator<Book> it = library.getIterator();
-
-		Book foundBook;
-	boolean matchFound = false;
-	
-	while(it.hasNext() && !matchFound) {    
-	       
-	    String userInput = reader.getStringInput().toLowerCase().trim();
-	    Book book = it.next();
-	    
-	    if(userInput.equals(book.getTitle().toLowerCase())) {
-		System.out.println();
-	        System.out.println("########## Match Found: ##########");
-		foundBook = book;
-		printBookDetails(foundBook);
-		System.out.println();
-		matchFound = true;
-	    }
-	}
-	    if(!matchFound){System.out.println("No match found.");}
-    }
-    
     /**
     * Takes in author name from user, passes it to Library object. Library filters its 
     * ArrayList using input, and returns an iterator object which is printed. 
@@ -155,19 +120,6 @@ public class Interface
 	System.out.println("Thank you. Goodbye.");
     }
 
-    /**
-    * Fills the library with a small collection of books 
-    * for testing purposes.
-    */
-    private void fillLibrary()
-    {
-        library.addBook("The Colour of Magic", "Terry Pratchett", "Corgi", "1985", "285", "9780552124751");
-        library.addBook("The Light Fantastic", "Terry Pratchett", "Corgi", "1986", "241", "9780061020704");
-        library.addBook("A first course in machine learning (Second edition)", "Simon Rogers, Mark Girolami", "CRC Press", "2017", "397","9781498738484");
-        library.addBook("The Shadow of the Torturer", "Gene Wolfe", "Tom Doherty Associates, Inc.", "1982", "262", "9780671540661");
-        library.addBook("Molecular Gastronomy: Exploring the science of Flavor", "Hervé This", "Columbia University Press", "2006", "377", "9780231133128");
-        library.addBook("Les Halles Cookbook", "Anthony Bourdain", "Bloomsbury", "2004", "304", "9780747580126");
-        library.addBook("Larousse Gastronomique", "Prosper Montagné", "Éditions Larousse", "1938", "1087", "9780600620426");
-    }
+
     
 }

@@ -25,6 +25,7 @@ public class Library
     {
         // initialise library as ArrayList object of type Book 
         library = new ArrayList<>();
+        fillLibrary();
     }
     
     /**
@@ -49,6 +50,7 @@ public class Library
 
     
 
+    //TODO see if this can be used for anything?
 
     /* The previous attempt. Can't deal with all the lambda exception handling bullshit...
      List<Book> matchingBook = library.stream()
@@ -59,7 +61,7 @@ public class Library
 
 
     /**
-    * Method to filter a stream of the library ArrayList, and retun the filtered results as a list.
+    * Method to filter a stream of the library ArrayList, and return the filtered results as a list.
     */
     public Iterator<Book> filterByAuthor(String author)
     {
@@ -78,6 +80,21 @@ public class Library
     public Iterator<Book> getIterator()
     {
 	return library.iterator();
+    }
+
+    /**
+     * Fills the library with a small collection of books
+     * for testing purposes.
+     */
+    private void fillLibrary()
+    {
+        addBook("The Colour of Magic", "Terry Pratchett", "Corgi", "1985", "285", "9780552124751");
+        addBook("The Light Fantastic", "Terry Pratchett", "Corgi", "1986", "241", "9780061020704");
+        addBook("A first course in machine learning (Second edition)", "Simon Rogers, Mark Girolami", "CRC Press", "2017", "397","9781498738484");
+        addBook("The Shadow of the Torturer", "Gene Wolfe", "Tom Doherty Associates, Inc.", "1982", "262", "9780671540661");
+        addBook("Molecular Gastronomy: Exploring the science of Flavor", "Hervé This", "Columbia University Press", "2006", "377", "9780231133128");
+        addBook("Les Halles Cookbook", "Anthony Bourdain", "Bloomsbury", "2004", "304", "9780747580126");
+        addBook("Larousse Gastronomique", "Prosper Montagné", "Éditions Larousse", "1938", "1087", "9780600620426");
     }
 
 }
