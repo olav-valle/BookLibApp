@@ -85,15 +85,15 @@ public class BookLibApp
 	    Book book = it.next();
 	    
 	    if(userInput.equals(book.getTitle().toLowerCase())) {
-		System.out.println("");
+		System.out.println();
 	        System.out.println("########## Match Found: ##########");
 		foundBook = book;
 		printBookDetails(foundBook);
-		System.out.println("");
+		System.out.println();
 		matchFound = true;
 	    }
 	}
-	    if(matchFound == false){System.out.println("No match found.");}
+	    if(!matchFound){System.out.println("No match found.");}
     }
     
     /**
