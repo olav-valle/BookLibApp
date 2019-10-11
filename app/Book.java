@@ -1,4 +1,5 @@
 import java.lang.reflect.Field;
+import java.util.List;
 
 /**
  * A class that maintains information on a book.
@@ -104,4 +105,36 @@ public class Book
        return match;
   */
 
+    /**
+     * Human readable print formatted string of book details.
+     * @return Human readable book details.
+     */
+    public String detailString()
+    {
+        return "Book title: " + this.title + "\n"
+                + "Author: " + this.authorName + "\n"
+                + "Publisher: " + this.publisher + "\n"
+                + "Date Published: " + this.date + "\n"
+                + "Number of pages: " + this.pages + "\n"
+                + getBorrowedAsString() + "\n"
+                + "EAN-13 reference: " + this.ean13;
+
+    }
+
+    public boolean matchDetails(String keyword)
+    {
+        boolean match = false;
+        String[] details = detailsArray();
+        for (String s : details)
+            if(s.contains(keyword)) {
+                match = true;
+        }
+        return match;
+    }
+
+    private String[] detailsArray()
+    {
+        return (new String[]{title, authorName, publisher, date, pages, ean13});
+
+    }
 }

@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 /**
  * A library class that creates and manages an ArrayList of Book objects.
@@ -68,14 +69,27 @@ public class Library
 	    return matchingAuthor.iterator();
     }
 
+    public List<String> searchByKeyword(String keyword)
+    {
+        List<String> match = null;
+        for (Book b : library){
+            if(b.matchDetails(keyword)){
+                match.add(b.detailString());
+            }
+        }
+        return match;
+    }
+
     public ArrayList<Book> getCollection()
     {
 	return library;
     }
      
-    public Iterator<Book> getIterator()
+    public Iterator<String> getDetailsIterator()
     {
-	return library.iterator();
+        List<String> books = null;
+        library.forEach(b -> books.add(b.detailString()));
+	    return books.iterator();
     }
 
     /**

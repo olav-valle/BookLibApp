@@ -46,41 +46,49 @@ public class Interface
 					exit = true;
 					break;
 				case 1:
-					searchByAuthor();
+					searchByKeyword();
 					break;
 				case 3:
 					listAllBooksIterator();
 					break;
 				case 2:
 					//todo make addBook interface method
-					System.out.println("That feature isn't available yet.");
+					System.out.println("That feature is not yet implemented.");
 					break;
 			}
 
 		}
     }
 
+//
+//    /**
+//    * Takes in author name from user, passes it to Library object. Library filters its
+//    * ArrayList using input, and returns an iterator object which is printed.
+//    */
+//    private void searchByAuthor()
+//    {
+//	String userInput = reader.getStringInput().toLowerCase().trim();
+//	Iterator<Book> it = library.filterByAuthor(userInput);
+//
+//	while(it.hasNext())
+//	{
+//	    printBookDetails(it.next());
+//	}
+//    }
 
-    /**
-    * Takes in author name from user, passes it to Library object. Library filters its 
-    * ArrayList using input, and returns an iterator object which is printed. 
-    */
-    private void searchByAuthor()
-    {
-	String userInput = reader.getStringInput().toLowerCase().trim();
-	Iterator<Book> it = library.filterByAuthor(userInput);
-
-	while(it.hasNext())
+    private void searchByKeyword()
 	{
-	    printBookDetails(it.next());
+		String userInput = reader.getStringInput().toLowerCase().trim();
+		for (String s : library.searchByKeyword(userInput)){
+			printBookDetails(s);
+		}
 	}
-    }
 
 
 
     private void listAllBooksIterator()
     {
-		Iterator<Book> it = library.getIterator();
+		Iterator<String> it = library.getDetailsIterator();
 
 		System.out.println("Listing all books in no particular order.");
 		System.out.println();
@@ -98,15 +106,9 @@ public class Interface
 		}
     }
 
-    private void printBookDetails(Book book)
+    private void printBookDetails(String details)
     {
-        System.out.println("Book title: " + book.getTitle());
-        System.out.println("Author: " + book.getName());
-        System.out.println("Publisher: " + book.getPublisher());
-        System.out.println("Date published: " + book.getDate());
-        System.out.println("Numer of pages: " + book.getPages());
-        System.out.println(book.getBorrowedAsString());
-        System.out.println("EAN-13 reference: " + book.getRefNumber());
+		System.out.println(details);
     }
 
     private void printWelcome()
