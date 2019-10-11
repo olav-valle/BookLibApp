@@ -60,21 +60,6 @@ public class Interface
 		}
     }
 
-//
-//    /**
-//    * Takes in author name from user, passes it to Library object. Library filters its
-//    * ArrayList using input, and returns an iterator object which is printed.
-//    */
-//    private void searchByAuthor()
-//    {
-//	String userInput = reader.getStringInput().toLowerCase().trim();
-//	Iterator<Book> it = library.filterByAuthor(userInput);
-//
-//	while(it.hasNext())
-//	{
-//	    printBookDetails(it.next());
-//	}
-//    }
 
     private void searchByKeyword()
 	{

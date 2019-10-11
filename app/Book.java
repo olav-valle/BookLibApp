@@ -1,4 +1,6 @@
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -90,21 +92,6 @@ public class Book
         return borrowedString;
     }
 
-    /*
-     * Searches all instance fields for match against provided keyword.
-     * @return true if match was found, false if not
-     *
-    //TODO Finish this method?
-    public boolean searchFields(String keyword)
-    {
-       boolean match = false;
-        Field[] fields = getClass().getDeclaredFields();
-        for (Field f : fields) {
-            if(f.get(this))
-        }
-       return match;
-  */
-
     /**
      * Human readable print formatted string of book details.
      * @return Human readable book details.
@@ -121,20 +108,28 @@ public class Book
 
     }
 
-    public boolean matchDetails(String keyword)
-    {
+    public boolean matchDetails(String keyword) {
         boolean match = false;
-        String[] details = detailsArray();
-        for (String s : details)
-            if(s.contains(keyword)) {
+        Iterator<String> it = detailsIterator();
+        while (it.hasNext() && !match) {
+            if (it.next().contains(keyword)) {
                 match = true;
+            }
         }
         return match;
     }
 
-    private String[] detailsArray()
+    private Iterator<String> detailsIterator()
     {
-        return (new String[]{title, authorName, publisher, date, pages, ean13});
+        ArrayList<String> details = new ArrayList<>();
+        details.add(title.toLowerCase());
+        details.add(authorName.toLowerCase());
+        details.add(publisher.toLowerCase());
+        details.add(date.toLowerCase());
+        details.add(pages.toLowerCase());
+        details.add(ean13.toLowerCase());
+
+        return details.iterator();
 
     }
 }

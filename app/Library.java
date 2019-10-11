@@ -1,8 +1,11 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /**
  * A library class that creates and manages an ArrayList of Book objects.
  * 
@@ -23,7 +26,7 @@ public class Library
     {
         // initialise library as ArrayList object of type Book 
         library = new ArrayList<>();
-        fillLibrary();
+        fillLibrary(); //adds books for testing
     }
     
     /**
@@ -38,25 +41,12 @@ public class Library
      * Creates new Book instance, using the parameters given, by calling 
      * Book constructor, and adds the new book to library using addBook method.
      */
-    
     public void addBook(String bookTitle, String bookAuthor,
                         String bookPublisher,String publishingDate, 
                         String bookPages, String ean13)
     {
         addBook(new Book(bookTitle, bookAuthor, bookPublisher, publishingDate, bookPages, ean13));
     }
-
-    
-
-    //TODO see if this can be used for anything?
-
-    /* The previous attempt. Can't deal with all the lambda exception handling bullshit...
-     List<Book> matchingBook = library.stream()
-     .filter(b -> ((Search.invokeAllMethods(b)).toString().toLowerCase()).contains(kw))
-     .collect(Collectors.toList());
-     return matchingBook.iterator();
-    */
-
 
     /**
     * Method to filter a stream of the library ArrayList, and return the filtered results as a list.
@@ -71,7 +61,7 @@ public class Library
 
     public List<String> searchByKeyword(String keyword)
     {
-        List<String> match = null;
+        ArrayList<String> match = new ArrayList<>();
         for (Book b : library){
             if(b.matchDetails(keyword)){
                 match.add(b.detailString());
@@ -87,9 +77,12 @@ public class Library
      
     public Iterator<String> getDetailsIterator()
     {
-        List<String> books = null;
-        library.forEach(b -> books.add(b.detailString()));
-	    return books.iterator();
+        ArrayList<String> books = new ArrayList<>();
+
+        for(Book b : library){
+            books.add(b.detailString());
+        }
+        return books.iterator();
     }
 
     /**
