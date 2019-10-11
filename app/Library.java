@@ -1,6 +1,3 @@
-import java.lang.Object;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -31,7 +28,7 @@ public class Library
     /**
      * Add an existing book object to list
      */
-    public void addBook(Book existingBook)
+    private void addBook(Book existingBook)
     {
         this.library.add(existingBook);
     }
@@ -65,9 +62,8 @@ public class Library
     */
     public Iterator<Book> filterByAuthor(String author)
     {
-	String aut = author;
-	List<Book> matchingAuthor = library.stream()
-	    .filter(b -> aut.equals(b.getName().toLowerCase()))
+        List<Book> matchingAuthor = library.stream()
+	    .filter(b -> author.equals(b.getName().toLowerCase()))
 	    .collect(Collectors.toList());
 	    return matchingAuthor.iterator();
     }

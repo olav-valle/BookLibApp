@@ -36,19 +36,27 @@ public class Interface
 		while(!exit)
 		{
 	    	printWelcome();
-			int userInput = reader.getIntInput();
-			//TODO replace with switch statement
-			if(userInput == 4){
-			printFarewell();
-			exit = true;
+
+	    	int userInput = reader.getIntInput();
+
+			//this represents the main user interface menu
+			switch (userInput) {
+				case 4:
+					printFarewell();
+					exit = true;
+					break;
+				case 1:
+					searchByAuthor();
+					break;
+				case 3:
+					listAllBooksIterator();
+					break;
+				case 2:
+					//todo make addBook interface method
+					System.out.println("That feature isn't available yet.");
+					break;
 			}
-			else if(userInput == 1) {
-			//searchByTitle();
-			searchByAuthor();
-			}
-			else if(userInput == 3) {
-			listAllBooksIterator();
-			}
+
 		}
     }
 
@@ -70,27 +78,24 @@ public class Interface
 
 
 
-    public void listAllBooksIterator()
+    private void listAllBooksIterator()
     {
-	Iterator<Book> it = library.getIterator();
-	
-	int index = 1;
+		Iterator<Book> it = library.getIterator();
 
-	System.out.println("Listing all books in no particular order.");
-	System.out.println("");
+		System.out.println("Listing all books in no particular order.");
+		System.out.println();
         System.out.println("###############################");
-        System.out.println("");
+        System.out.println();
 
-	while(it.hasNext())
-	{
-	    printBookDetails(it.next());
-	    System.out.println("");
-	    System.out.println("###############################");
-	    System.out.println("");
-	    // retrieve next book object directly from iterator
-	    // and call print with it
-	    index++;
-	}
+		while(it.hasNext())
+		{
+			printBookDetails(it.next());
+			System.out.println();
+			System.out.println("###############################");
+			System.out.println();
+			// retrieve next book object directly from iterator
+			// and call print with it
+		}
     }
 
     private void printBookDetails(Book book)
@@ -106,7 +111,7 @@ public class Interface
 
     private void printWelcome()
     {
-	System.out.println("");
+	System.out.println();
 	System.out.println("Welcome to BookLibApp. What is your request?");
 	System.out.println("1. Search the library");
 	System.out.println("2. Add a book.");

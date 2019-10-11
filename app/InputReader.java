@@ -44,9 +44,8 @@ public class InputReader
 	System.out.print("> ");         // print prompt
 	
 	//get user input as String
-	String inputLine = reader.nextLine();
-	//separate input String into individual words
-	return inputLine;
+        //separate input String into individual words
+	return reader.nextLine();
     }
 
     /**

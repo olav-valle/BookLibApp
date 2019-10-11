@@ -15,6 +15,8 @@ import java.lang.reflect.InvocationTargetException;
  * @author Olav Valle
  * @version 0.1-20190928
  */
+
+//todo this entire class needs to be razed and rebuilt
 public class Search
 {
     // instance variables - replace the example below with your own
@@ -50,6 +52,7 @@ public class Search
      * @param obj Object whoose methods are to be called
      * @return
      */
+    //TODO this is a crime scene... Burn it all.
     public static Object invokeAllMethods(Object obj) throws IllegalAccessException, InvocationTargetException
     {
         //Arrays.stream(methods).forEach(m -> System.out.println(m.invoke(obj)));
