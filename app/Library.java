@@ -1,3 +1,5 @@
+import com.sun.source.tree.LiteralTree;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -28,7 +30,7 @@ public class Library
         library = new ArrayList<>();
         fillLibrary(); //adds books for testing
     }
-    
+
     /**
      * Add an existing book object to list
      */
@@ -36,38 +38,25 @@ public class Library
     {
         this.library.add(existingBook);
     }
-    
+
     /**
-     * Creates new Book instance, using the parameters given, by calling 
+     * Creates new Book instance, using the parameters given, by calling
      * Book constructor, and adds the new book to library using addBook method.
      */
     public void addBook(String bookTitle, String bookAuthor,
-                        String bookPublisher,String publishingDate, 
+                        String bookPublisher,String publishingDate,
                         String bookPages, String ean13)
     {
         addBook(new Book(bookTitle, bookAuthor, bookPublisher, publishingDate, bookPages, ean13));
     }
 
-    /**
-    * Method to filter a stream of the library ArrayList, and return the filtered results as a list.
-    */
-    public Iterator<Book> filterByAuthor(String author)
+    public Iterator<String> search(String keyword)
     {
-        List<Book> matchingAuthor = library.stream()
-	    .filter(b -> author.equals(b.getName().toLowerCase()))
-	    .collect(Collectors.toList());
-	    return matchingAuthor.iterator();
-    }
-
-    public List<String> searchByKeyword(String keyword)
-    {
-        ArrayList<String> match = new ArrayList<>();
-        for (Book b : library){
-            if(b.matchDetails(keyword)){
-                match.add(b.detailString());
-            }
-        }
-        return match;
+        ArrayList<String> matches = new ArrayList<>();
+        library.stream()
+                .filter(book -> book.matchDetails(keyword))
+                .forEach(book -> matches.add(book.detailString()));
+        return matches.iterator();
     }
 
     public ArrayList<Book> getCollection()
@@ -78,10 +67,7 @@ public class Library
     public Iterator<String> getDetailsIterator()
     {
         ArrayList<String> books = new ArrayList<>();
-
-        for(Book b : library){
-            books.add(b.detailString());
-        }
+        library.forEach(book -> books.add(book.detailString()));
         return books.iterator();
     }
 

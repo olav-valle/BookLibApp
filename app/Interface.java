@@ -64,8 +64,10 @@ public class Interface
     private void searchByKeyword()
 	{
 		String userInput = reader.getStringInput().toLowerCase().trim();
-		for (String s : library.searchByKeyword(userInput)){
-			printBookDetails(s);
+		Iterator<String> it = library.search(userInput);
+		it.forEach(printBookDetails(it.next()));
+		while(it.hasNext()){
+			printBookDetails(it.next());
 		}
 	}
 
