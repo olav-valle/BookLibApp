@@ -2,14 +2,11 @@ import java.util.Iterator;
 /**
  * The user interface of the book library application.
  * Presents the user with a CLI menu list of app functions.
- * All search and print functionality is handled by this class,
+ * All print functionality is handled by this class,
  * while input and the library is handled externally.
  *@author Olav Valle
  *@version 0.1-20190924
  */
-
-//TODO Move search functions and list functions to separate class
-//TODO alternative: handle search and list in the Library class
 
 public class Interface
 {
@@ -61,43 +58,65 @@ public class Interface
     }
 
 
+    /**
+     * Searches the collections for matches to a string input by the user.
+     */
     private void searchByKeyword()
     {
         String userInput = reader.getStringInput().toLowerCase().trim();
         Iterator<String> it = library.search(userInput);
-        it.forEach(printBookDetails(it.next()));
-        while(it.hasNext()){
-            printBookDetails(it.next());
+        if(it.hasNext()){ // check if iterator is empty
+            printIterator(it);
         }
+        else { System.out.println("No match found");}
     }
 
 
-
+    /**
+     * Prints the details about each book stored in the collection.
+     */
     private void listAllBooksIterator()
     {
-        Iterator<String> it = library.getDetailsIterator();
-
         System.out.println("Listing all books in no particular order.");
         System.out.println();
         System.out.println("###############################");
         System.out.println();
+        printIterator(library.getDetailsIterator());
 
+    }
+
+    /**
+     * Prints all String objects held in the provided Iterator
+     * @param it Iterator<String> holding objects to print.
+     */
+    private void printIterator(Iterator<String> it)
+    {
         while(it.hasNext())
         {
             printBookDetails(it.next());
-            System.out.println();
-            System.out.println("###############################");
-            System.out.println();
-            // retrieve next book object directly from iterator
-            // and call print with it
         }
     }
 
+    /**
+     * Prints the String object provided as parameter, with some surrounding formatting.
+     * Example output:
+     *                 "Text contained in string."
+     *                 <empty line>
+     *                 ###############################
+     *                 <empty line>
+     * @param details String that is to be printed.
+     */
     private void printBookDetails(String details)
     {
         System.out.println(details);
+        System.out.println();
+        System.out.println("###############################");
+        System.out.println();
     }
 
+    /**
+     * Prints the menu that shows the available program functions to the user.
+     */
     private void printWelcome()
     {
         System.out.println();
@@ -109,11 +128,11 @@ public class Interface
         System.out.println("Please type the number of the service you require.");
     }
 
+    /**
+     * Prints a farewell message to the user.
+     */
     private void printFarewell()
     {
         System.out.println("Thank you. Goodbye.");
     }
-
-
-
 }

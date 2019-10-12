@@ -50,20 +50,35 @@ public class Library
         addBook(new Book(bookTitle, bookAuthor, bookPublisher, publishingDate, bookPages, ean13));
     }
 
+    /**
+     * Returns iterator containing all objects in collection that match the given keyword.
+     * @param keyword The keyword to search for.
+     * @return Iterator containing all objects that match filter predicate.
+     */
     public Iterator<String> search(String keyword)
     {
         ArrayList<String> matches = new ArrayList<>();
         library.stream()
                 .filter(book -> book.matchDetails(keyword))
                 .forEach(book -> matches.add(book.detailString()));
+        if(matches.isEmpty())
+
         return matches.iterator();
     }
 
+    /**
+     * Returns the collection object this instance holds.
+     * @return The library collection.
+     */
     public ArrayList<Book> getCollection()
     {
 	return library;
     }
-     
+
+    /**
+     * Returns Iterator holding description strings for objects in collection.
+     * @return Iterator holding String objects.
+     */
     public Iterator<String> getDetailsIterator()
     {
         ArrayList<String> books = new ArrayList<>();
