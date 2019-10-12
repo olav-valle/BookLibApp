@@ -34,6 +34,8 @@ public class Library
     private void addBook(Book existingBook)
     {
         this.library.add(existingBook);
+        bookDetails(existingBook);
+
     }
 
     /**
@@ -50,7 +52,7 @@ public class Library
     /**
      * Returns iterator containing all objects in collection that match the given keyword.
      * @param keyword The keyword to search for.
-     * @return Iterator containing all objects that match filter predicate.
+     * @return Iterator containing the details of  all objects that match filter predicate.
      */
     //TODO The filter adds a matching book to the matches collection over and over
     // for each matching word in HashSet.
@@ -78,7 +80,7 @@ public class Library
 
     /**
      * Returns Iterator holding description strings for objects in collection.
-     * @return Iterator holding String objects.
+     * @return Iterator holding descriptions of all books in collection.
      */
     public Iterator<String> getDetailsIterator()
     {
@@ -87,9 +89,12 @@ public class Library
         return books.iterator();
     }
 
+    public String bookDetails(Book book)
+    {
+        return book.detailString();
+    }
     /**
-     * Fills the library with a small collection of books
-     * for testing purposes.
+     * Fills the library with a small collection of books for testing purposes.
      */
     private void fillLibrary()
     {

@@ -139,13 +139,13 @@ public class Book
      */
     public String detailString()
     {
-        return "Book title: " + this.title + "\n"
-                + "Author: " + this.authorName + "\n"
-                + "Publisher: " + this.publisher + "\n"
-                + "Date Published: " + this.date + "\n"
-                + "Number of pages: " + this.pages + "\n"
-                + getBorrowedAsString() + "\n"
-                + "EAN-13 reference: " + this.ean13;
+        return  "Book title:       " + this.title + "\n" +
+                "Author:           " + this.authorName + "\n" +
+                "Publisher:        " + this.publisher + "\n" +
+                "Date Published:   " + this.date + "\n" +
+                "Number of pages:  " + this.pages + "\n" +
+                "EAN-13 reference: " + this.ean13 + "\n" +
+                getBorrowedAsString();
 
     }
 
@@ -159,7 +159,7 @@ public class Book
         boolean match = false;
         Iterator<String> it = detailsIterator();
         while (it.hasNext() && !match) {
-            if (it.next().contains(keyword)) {
+            if (it.next().toLowerCase().contains(keyword)) {
                 match = true;
             }
         }

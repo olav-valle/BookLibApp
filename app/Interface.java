@@ -60,7 +60,30 @@ public class Interface
     }
 
 
+    /**
+     * Adds a book to the library collection, with details specified by user input.
+     */
     private void addBook(){
+        System.out.println("Please fill in book details.");
+        System.out.print("Book title: ");
+        String title = reader.getStringInput();
+
+        System.out.print("Author name: ");
+        String author = reader.getStringInput();
+
+        System.out.print("Publisher: ");
+        String publisher = reader.getStringInput();
+
+        System.out.print("Publishing date: ");
+        String date = reader.getStringInput();
+
+        System.out.print("Number of pages: ");
+        String pages = reader.getStringInput();
+
+        System.out.print("EAN-13 reference number: ");
+        String ean13 = reader.getStringInput();
+
+        library.addBook(title, author, publisher, date, pages, ean13);
 
     }
 
