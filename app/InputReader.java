@@ -23,9 +23,8 @@ public class InputReader
 
     /**
      * Read a line of text from standard input (the text terminal),
-     * and return it as a String.
-     *
-     * @return  A String typed by the user.
+     * separate the individual words, and return them as a HashSet.
+     * @return  HashSet containing the words the user has typed.
      */
     public HashSet<String> getStringInputAsSet()
     {

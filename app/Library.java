@@ -1,9 +1,6 @@
 import com.sun.source.tree.LiteralTree;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -55,12 +52,18 @@ public class Library
      * @param keyword The keyword to search for.
      * @return Iterator containing all objects that match filter predicate.
      */
-    public Iterator<String> search(String keyword)
+    public Iterator<String> search(HashSet<String> keyword)
     {
         ArrayList<String> matches = new ArrayList<>();
-        library.stream()
-                .filter(book -> book.matchDetails(keyword))
-                .forEach(book -> matches.add(book.detailString()));
+        keyword.forEach(kw -> library.stream()
+                        .filter(book -> book.matchDetails(kw))
+                        .forEach(book -> matches.add(book.detailString())));
+        /*
+        for(String kw : keyword) {
+            library.stream()
+                    .filter(book -> book.matchDetails(kw))
+                    .forEach(book -> matches.add(book.detailString()));
+        }*/
         return matches.iterator();
     }
 

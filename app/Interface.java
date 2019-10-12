@@ -1,3 +1,4 @@
+import java.util.HashSet;
 import java.util.Iterator;
 /**
  * The user interface of the book library application.
@@ -63,7 +64,8 @@ public class Interface
      */
     private void searchByKeyword()
     {
-        String userInput = reader.getStringInput().toLowerCase().trim();
+        //String userInput = reader.getStringInput().toLowerCase().trim();
+        HashSet<String> userInput = reader.getStringInputAsSet();
         Iterator<String> it = library.search(userInput);
         if(it.hasNext()){ // check if iterator is empty
             printIterator(it);
