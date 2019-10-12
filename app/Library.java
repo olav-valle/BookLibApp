@@ -61,8 +61,6 @@ public class Library
         library.stream()
                 .filter(book -> book.matchDetails(keyword))
                 .forEach(book -> matches.add(book.detailString()));
-        if(matches.isEmpty())
-
         return matches.iterator();
     }
 
