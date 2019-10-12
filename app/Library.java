@@ -52,12 +52,18 @@ public class Library
      * @param keyword The keyword to search for.
      * @return Iterator containing all objects that match filter predicate.
      */
+    //TODO The filter adds a matching book to the matches collection over and over
+    // for each matching word in HashSet.
+    // My guess is that this is because the function re-filters whole library
+    // for each word in the set.
+    // Find some way to skip to next book when match has been confirmed.
     public Iterator<String> search(HashSet<String> keyword)
     {
         ArrayList<String> matches = new ArrayList<>();
-        keyword.forEach(kw -> library.stream() //for each String in the HashSet
-                        .filter(book -> book.matchDetails(kw)) // ask object if it matches keyword
-                        .forEach(book -> matches.add(book.detailString()))); // for each book that matches
+
+        keyword.forEach(word -> library.stream() //for each word in the HashSet
+                        .filter(book -> book.matchDetails(word)) // ask object if it matches the word
+                        .forEach(book -> matches.add(book.detailString()))); // add details of matches to list
         return matches.iterator();
     }
 

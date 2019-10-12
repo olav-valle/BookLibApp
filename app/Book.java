@@ -1,5 +1,6 @@
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,17 +23,26 @@ public class Book
     private String ean13;  
     private boolean borrowed;
 
+
     /**
-     * User inputs relevant information. 
-     * Borrowed status initialises to false, since book has not been 
-     * available until now.
-     * 
-     * Class does not contain methods for changing String fields 
+     * Book object constructor.
+     * User inputs relevant information.
+     * Borrowed status initialises to false, since book has not been
+     * available for loan until now.
+     *
+     * Class does not contain methods for changing String fields
      * after initialisation
-     * 
-     * 
-     * Warning: EAN-13 String does not demand 13 characters, and is only 
-     * placeholder for functional IAN/EAN-13 encoding. 
+     *
+     * Warning: EAN-13 String does not demand 13 characters, and is only
+     * placeholder for functional IAN/EAN-13 encoding.
+     *
+     *
+     * @param bookTitle The title of the book.
+     * @param bookAuthor The name of the author.
+     * @param bookPublisher Name of the publisher.
+     * @param publishingDate The year the bok was published.
+     * @param bookPages Number of pages in book.
+     * @param ean13 EAN-13 reference number.
      */
     public Book(String bookTitle, String bookAuthor, 
                 String bookPublisher, String publishingDate, 
@@ -64,21 +74,52 @@ public class Book
 
 // -------------------- accessors --------------------
 
+    /**
+     * Returns book title.
+     * @return book title
+     */
     public String getTitle() { return this.title; }
 
-    public String getName() { return this.authorName; }
+    /**
+     * Returns author name
+     * @return author name
+     */
+    public String getAuthorName() { return this.authorName; }
 
+    /**
+     * Return book publisher name.
+     * @return publisher name.
+     */
     public String getPublisher() { return this.publisher; }
 
+    /**
+     * Returns publishing year of the book.
+     * @return publishing year of the book.
+     */
     public String getDate() { return this.date; }
 
+    /**
+     * Returns number of pages in book.
+     * @return number of pages in book.
+     */
     public String getPages() { return this.pages; }
 
+    /**
+     * Returns the EAN13 reference number of the book.
+     * @return EAN-13 reference number.
+     */
     public String getRefNumber() { return this.ean13; }
 
+    /**
+     * Returns false if book is available for loan, true if it is currently being borrowed.
+     * @return false if available, true if on loan.
+     */
     public boolean getBorrowed() { return this.borrowed; }
-    
-    // returns a human readable string with borrowed status
+
+    /**
+     * Returns a human readable string stating if the book is currently `available for loan or not.
+     * @return string saying if book is available for loan or not.
+     */
     public String getBorrowedAsString()
     {
         String borrowedString;
@@ -108,6 +149,12 @@ public class Book
 
     }
 
+    /**
+     * Compares keyword parameter with the book's details (title, author name etc.),
+     * and returns a boolean true if a match is found, and false if no match is found.
+      * @param keyword the keyword to compare with book details.
+     * @return true if keyword matches book details, false if it does not.
+     */
     public boolean matchDetails(String keyword) {
         boolean match = false;
         Iterator<String> it = detailsIterator();
@@ -119,17 +166,12 @@ public class Book
         return match;
     }
 
+    /**
+     * Returns an iterator for a collection containing all the String fields of the book.
+     * @return Iterator for collection of book detail strings.
+     */
     private Iterator<String> detailsIterator()
     {
-        ArrayList<String> details = new ArrayList<>();
-        details.add(title.toLowerCase());
-        details.add(authorName.toLowerCase());
-        details.add(publisher.toLowerCase());
-        details.add(date.toLowerCase());
-        details.add(pages.toLowerCase());
-        details.add(ean13.toLowerCase());
-
-        return details.iterator();
-
+        return List.of(title, authorName, publisher, date, pages, ean13).iterator();
     }
 }
