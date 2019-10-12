@@ -1,9 +1,6 @@
-import com.sun.source.tree.LiteralTree;
-
-import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * A library class that creates and manages an ArrayList of Book objects.
@@ -19,7 +16,7 @@ public class Library
     private ArrayList<Book> library;
     
     /**
-     * Constructor for objects of class Library
+     *
      */
     public Library()
     {
@@ -34,8 +31,6 @@ public class Library
     private void addBook(Book existingBook)
     {
         this.library.add(existingBook);
-        bookDetails(existingBook);
-
     }
 
     /**
@@ -49,6 +44,10 @@ public class Library
         addBook(new Book(bookTitle, bookAuthor, bookPublisher, publishingDate, bookPages, ean13));
     }
 
+    public void removeBook(Book book)
+    {
+        library.remove(book);
+    }
     /**
      * Returns iterator containing all objects in collection that match the given keyword.
      * @param keyword The keyword to search for.

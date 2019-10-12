@@ -50,40 +50,50 @@ public class Interface
                     listAllBooksIterator();
                     break;
                 case 2:
-                    //todo make addBook interface method
                     addBook();
-                    //System.out.println("That feature is not yet implemented.");
+                    break;
+                case 5:
+                    removeBook();
+                    break;
+                case 0:
+                    printInputError();
                     break;
             }
 
         }
     }
 
-
     /**
-     * Adds a book to the library collection, with details specified by user input.
+     * Adds a book to the library collection, with details specified through user input.
      */
     private void addBook(){
         System.out.println("Please fill in book details.");
-        System.out.print("Book title: ");
+        System.out.println("Book title: ");
         String title = reader.getStringInput();
 
-        System.out.print("Author name: ");
+        System.out.println("Author name: ");
         String author = reader.getStringInput();
 
-        System.out.print("Publisher: ");
+        System.out.println("Publisher: ");
         String publisher = reader.getStringInput();
 
-        System.out.print("Publishing date: ");
+        System.out.println("Publishing date: ");
         String date = reader.getStringInput();
 
-        System.out.print("Number of pages: ");
+        System.out.println("Number of pages: ");
         String pages = reader.getStringInput();
 
-        System.out.print("EAN-13 reference number: ");
+        System.out.println("EAN-13 reference number: ");
         String ean13 = reader.getStringInput();
 
         library.addBook(title, author, publisher, date, pages, ean13);
+        System.out.println("###############################");
+        System.out.println("The book was successfully added to the library");
+        System.out.println("###############################");
+    }
+    private void removeBook()
+    {
+        System.out.println("Please enter ");
 
     }
 
@@ -129,7 +139,7 @@ public class Interface
 
         System.out.println();
         System.out.println("###############################");
-        System.out.println("End of list.");
+        System.out.println("          End of list.");
         System.out.println("###############################");
     }
 
@@ -162,6 +172,11 @@ public class Interface
         System.out.println("3. List all books.");
         System.out.println("4. Exit application.");
         System.out.println("Please type the number of the service you require.");
+    }
+
+    private void printInputError()
+    {
+        System.out.println("Please input a valid number.");
     }
 
     /**

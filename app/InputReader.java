@@ -38,26 +38,29 @@ public class InputReader
         return (new HashSet<>(Arrays.asList(wordsAsArray)));
     }
 
+    /**
+     * Returns user input as a String.
+     * @return user input String.
+     */
     public String getStringInput()
     {
 	System.out.print("> ");         // print prompt
-	
-	//get user input as String
-        //separate input String into individual words
 	return reader.nextLine();
     }
 
     /**
-    * Read integer input from stdin, and returns it to caller.
-    *
-    *@return An integer typed by user.
+    * Returns user input as integer value, or 0 if user input is not int.
+    *@return An integer typed by user, or 0 if input is not int.
     */
     public int getIntInput() 
     {
-	
+        int inputInt;
         System.out.print("> ");         // print prompt
-        int inputInt = reader.nextInt();
-	reader.nextLine(); //solves problem of leaving a line break behind
+
+        if(!(reader.hasNextInt())) { inputInt = 0; }
+        else { inputInt = reader.nextInt(); }
+
+        reader.nextLine();  //solves problem of leaving a line break behind
         return inputInt;
     }
 }
