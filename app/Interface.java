@@ -51,7 +51,8 @@ public class Interface
                     break;
                 case 2:
                     //todo make addBook interface method
-                    System.out.println("That feature is not yet implemented.");
+                    addBook();
+                    //System.out.println("That feature is not yet implemented.");
                     break;
             }
 
@@ -59,15 +60,23 @@ public class Interface
     }
 
 
+    private void addBook(){
+
+    }
+
     /**
      * Searches the collections for matches to a string input by the user.
      */
     private void searchByKeyword()
     {
-        //String userInput = reader.getStringInput().toLowerCase().trim();
+        System.out.println("###############################");
+        System.out.print("Search: ");
+
         HashSet<String> userInput = reader.getStringInputAsSet();
         Iterator<String> it = library.search(userInput);
-        if(it.hasNext()){ // check if iterator is empty
+
+        if(it.hasNext()){ // check if iterator is empty, i.e. if search had any matches
+            System.out.println("Match found. Showing details:");
             printIterator(it);
         }
         else { System.out.println("No match found");}
@@ -79,10 +88,7 @@ public class Interface
      */
     private void listAllBooksIterator()
     {
-        System.out.println("Listing all books in no particular order.");
-        System.out.println();
-        System.out.println("###############################");
-        System.out.println();
+        System.out.println("Listing all books in collection.");
         printIterator(library.getDetailsIterator());
 
     }
@@ -97,6 +103,11 @@ public class Interface
         {
             printBookDetails(it.next());
         }
+
+        System.out.println();
+        System.out.println("###############################");
+        System.out.println("End of list.");
+        System.out.println("###############################");
     }
 
     /**
@@ -110,10 +121,10 @@ public class Interface
      */
     private void printBookDetails(String details)
     {
-        System.out.println(details);
         System.out.println();
         System.out.println("###############################");
         System.out.println();
+        System.out.println(details);
     }
 
     /**

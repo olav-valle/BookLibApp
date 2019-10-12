@@ -31,7 +31,7 @@ public class InputReader
         System.out.print("> ");         // print prompt
 	
 	    //get user input as String
-	    String inputLine = reader.nextLine();
+	    String inputLine = this.reader.nextLine().toLowerCase();
 	    //separate input String into individual words
 	    String[] wordsAsArray = inputLine.split(" ");
 	    //return a set of word Strings

@@ -55,15 +55,9 @@ public class Library
     public Iterator<String> search(HashSet<String> keyword)
     {
         ArrayList<String> matches = new ArrayList<>();
-        keyword.forEach(kw -> library.stream()
-                        .filter(book -> book.matchDetails(kw))
-                        .forEach(book -> matches.add(book.detailString())));
-        /*
-        for(String kw : keyword) {
-            library.stream()
-                    .filter(book -> book.matchDetails(kw))
-                    .forEach(book -> matches.add(book.detailString()));
-        }*/
+        keyword.forEach(kw -> library.stream() //for each String in the HashSet
+                        .filter(book -> book.matchDetails(kw)) // ask object if it matches keyword
+                        .forEach(book -> matches.add(book.detailString()))); // for each book that matches
         return matches.iterator();
     }
 
