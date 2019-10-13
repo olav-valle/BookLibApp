@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * @version 20190908
  */
 
-//TODO move search to method that returns ArrayList with matches.
+//TODO reconsider storing object collection as HashMap instead of ArrayList
     
 public class Library
 {
@@ -22,13 +22,12 @@ public class Library
     private ArrayList<Book> library;
     
     /**
-     *
+     * Constructor
      */
     public Library()
     {
         // initialise library as ArrayList object of type Book 
         library = new ArrayList<>();
-        fillLibrary(); //adds books for testing
     }
 
     /**
@@ -62,17 +61,14 @@ public class Library
 
     /**
      * Returns iterator containing all objects in collection that match the given keyword.
-     * @param keyword The keyword to search for.
+     * @param keyword The keywords to search for.
      * @return Iterator containing the details of  all objects that match filter predicate.
      */
-    //TODO The filter adds a matching book to the matches collection over and over
-    // for each matching word in HashSet.
-    // My guess is that this is because the function re-filters whole library
-    // for each word in the set.
-    // Find some way to skip to next book when match has been confirmed.
+
     public Iterator<String> searchByKeyword(HashSet<String> keyword)
     {
-        return (search(keyword).stream() // passes keyword set to search method
+        return (search(keyword)
+                .stream() // passes keyword set to search method
                 .map(Book::detailString) // calls on details of books in set of matching books
                 .collect(Collectors.toCollection(HashSet::new))) // collects the detail strings in HashSet
                 .iterator(); // returns iterator for the set of detail strings
@@ -91,10 +87,10 @@ public class Library
     {
         HashSet<Book> matchingBooks = new HashSet<Book>();
 
-        keyword.forEach(word -> // for each word in keyword set
+        keyword.forEach(word -> // for each word in the keyword set
                 library.stream()
-                        .filter(b -> b.matchDetails(word)) // ask each book if it matches keyword
-                        .forEach(matchingBooks::add)); // add books that match to the set
+                       .filter(b -> b.matchDetails(word)) // ask each book if it matches keyword
+                       .forEach(matchingBooks::add)); // add books that match to the set
         return matchingBooks; // return the set of book objects that match the keyword.
 
     }
@@ -125,7 +121,7 @@ public class Library
     /**
      * Fills the library with a small collection of books for testing purposes.
      */
-    private void fillLibrary()
+    public void fillLibrary()
     {
         addBook("The Colour of Magic", "Terry Pratchett", "Corgi", "1985", "285", "9780552124751");
         addBook("The Light Fantastic", "Terry Pratchett", "Corgi", "1986", "241", "9780061020704");

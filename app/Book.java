@@ -120,6 +120,7 @@ public class Book
      * Returns a human readable string stating if the book is currently `available for loan or not.
      * @return string saying if book is available for loan or not.
      */
+    //TODO should this be refactored?
     public String getBorrowedAsString()
     {
         String borrowedString;
@@ -137,6 +138,8 @@ public class Book
      * Human readable print formatted string of book details.
      * @return Human readable book details.
      */
+    //TODO should this method be refactored?
+    // it is not strictly a vital function for this class.
     public String detailString()
     {
         return  "Book title:       " + this.title + "\n" +
@@ -155,6 +158,7 @@ public class Book
       * @param keyword the keyword to compare with book details.
      * @return true if keyword matches book details, false if it does not.
      */
+    //TODO Does this method cause increased coupling between Book and Library?
     public boolean matchDetails(String keyword) {
         boolean match = false;
         Iterator<String> it = detailsIterator();
@@ -170,6 +174,7 @@ public class Book
      * Returns an iterator for a collection containing all the String fields of the book.
      * @return Iterator for collection of book detail strings.
      */
+    //TODO Would it be better to make this public, to remove need for matchDetails method?
     private Iterator<String> detailsIterator()
     {
         return List.of(title, authorName, publisher, date, pages, ean13).iterator();

@@ -21,6 +21,10 @@ public class Interface
     {
         reader = new InputReader();
         library = new Library();
+        library.fillLibrary(); // Fills library with sample books for testing
+        //TODO move fillLibrary to test object,
+        // or implement file reader and store book details externally
+
     }
 
     /**
