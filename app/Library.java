@@ -72,16 +72,10 @@ public class Library
     // Find some way to skip to next book when match has been confirmed.
     public Iterator<String> searchByKeyword(HashSet<String> keyword)
     {
-        ArrayList<String> matches = new ArrayList<>();
-
-        (search(keyword)).forEach(b -> b.detailString());
-
-        return matches.iterator();
-
-        /*keyword.forEach(word -> library.stream() //for each word in the HashSet
-                        .filter(book -> book.matchDetails(word)) // ask object if it matches the word
-                        .forEach(book -> matches.add(book.detailString()))); // add details of matches to list*/
-
+        return (search(keyword).stream() // passes keyword set to search method
+                .map(Book::detailString) // calls on details of books in set of matching books
+                .collect(Collectors.toCollection(HashSet::new))) // collects the detail strings in HashSet
+                .iterator(); // returns iterator for the set of detail strings
     }
 
     /**
@@ -97,14 +91,11 @@ public class Library
     {
         HashSet<Book> matchingBooks = new HashSet<Book>();
 
-        keyword.forEach(word ->
+        keyword.forEach(word -> // for each word in keyword set
                 library.stream()
-                        .filter(b -> b.matchDetails(word))
-                        .forEach(matchingBooks::add));
-
-                //.collect(Collectors.toCollection(HashSet::new)));
-
-        return matchingBooks;
+                        .filter(b -> b.matchDetails(word)) // ask each book if it matches keyword
+                        .forEach(matchingBooks::add)); // add books that match to the set
+        return matchingBooks; // return the set of book objects that match the keyword.
 
     }
     /**
