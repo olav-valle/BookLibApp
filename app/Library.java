@@ -1,6 +1,9 @@
+import java.security.cert.CollectionCertStoreParameters;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * A library class that creates and manages an ArrayList of Book objects.
@@ -10,6 +13,9 @@ import java.util.Iterator;
  * @author Olav Valle   
  * @version 20190908
  */
+
+//TODO move search to method that returns ArrayList with matches.
+    
 public class Library
 {
     // only field is the ArrayList holding the books
@@ -44,10 +50,16 @@ public class Library
         addBook(new Book(bookTitle, bookAuthor, bookPublisher, publishingDate, bookPages, ean13));
     }
 
-    public void removeBook(Book book)
+    /**
+     * Remove a book from the collection.
+     * @param book The book to be removed.
+     * @return true if removal was successful, false if it failed.
+     */
+    public boolean removeBook(Book book)
     {
-        library.remove(book);
+       return library.remove(book);
     }
+
     /**
      * Returns iterator containing all objects in collection that match the given keyword.
      * @param keyword The keyword to search for.
@@ -58,16 +70,43 @@ public class Library
     // My guess is that this is because the function re-filters whole library
     // for each word in the set.
     // Find some way to skip to next book when match has been confirmed.
-    public Iterator<String> search(HashSet<String> keyword)
+    public Iterator<String> searchByKeyword(HashSet<String> keyword)
     {
         ArrayList<String> matches = new ArrayList<>();
 
-        keyword.forEach(word -> library.stream() //for each word in the HashSet
-                        .filter(book -> book.matchDetails(word)) // ask object if it matches the word
-                        .forEach(book -> matches.add(book.detailString()))); // add details of matches to list
+        (search(keyword)).forEach(b -> b.detailString());
+
         return matches.iterator();
+
+        /*keyword.forEach(word -> library.stream() //for each word in the HashSet
+                        .filter(book -> book.matchDetails(word)) // ask object if it matches the word
+                        .forEach(book -> matches.add(book.detailString()))); // add details of matches to list*/
+
     }
 
+    /**
+     * Filters the objects in the library using the HashSet of keywords provided.
+     * @param keyword HashSet containing the individual keywords as Strings
+     * @return HashSet containing all objects that match the keyword.
+     */
+    //TODO should this return a HashSet containing the matched books?
+    // The set should by its very nature only contain each book once,
+    // even though a single book may match several of the keywords.
+    // Will this cause issues if it tries to add the same book again?
+    private HashSet<Book> search(HashSet<String> keyword)
+    {
+        HashSet<Book> matchingBooks = new HashSet<Book>();
+
+        keyword.forEach(word ->
+                library.stream()
+                        .filter(b -> b.matchDetails(word))
+                        .forEach(matchingBooks::add));
+
+                //.collect(Collectors.toCollection(HashSet::new)));
+
+        return matchingBooks;
+
+    }
     /**
      * Returns the collection object this instance holds.
      * @return The library collection.

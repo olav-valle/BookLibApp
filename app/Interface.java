@@ -93,7 +93,8 @@ public class Interface
     }
     private void removeBook()
     {
-        System.out.println("Please enter ");
+        System.out.println("Please enter the title, author or other \n detail of the book you wish to remove:");
+
 
     }
 
@@ -106,7 +107,7 @@ public class Interface
         System.out.print("Search: ");
 
         HashSet<String> userInput = reader.getStringInputAsSet();
-        Iterator<String> it = library.search(userInput);
+        Iterator<String> it = library.searchByKeyword(userInput);
 
         if(it.hasNext()){ // check if iterator is empty, i.e. if search had any matches
             System.out.println("Match found. Showing details:");
