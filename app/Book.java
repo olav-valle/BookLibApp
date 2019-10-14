@@ -1,6 +1,4 @@
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashSet;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,10 +15,10 @@ public class Book
     private String publisher;
     private String date;
     private String pages;
-    // using String for EAN-13 for now. 
-    // possible to change to Long, for arithmetic 
+    private String ean13;
+    // using String for EAN-13 for now.
+    // possible to change to Long, for arithmetic
     // TODO: find and implement an EAN-13 generator class?
-    private String ean13;  
     private boolean borrowed;
 
 

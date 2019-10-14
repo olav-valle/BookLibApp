@@ -50,11 +50,22 @@ public class Library
     }
 
     /**
+     * Locates a book in the collection using its EAN-13 reference number (exact match),
+     * and then removes it from the library.
+     * @param ean13 The EAN-13 (ISBN) number of the book, as String type.
+     * @return True if book was removed successfully, false if book was not removed.
+     */
+    public boolean findAndRemoveBook(String ean13)
+    {
+       return library.removeIf(b -> b.getRefNumber().equals(ean13));
+    }
+
+    /**
      * Remove a book from the collection.
      * @param book The book to be removed.
      * @return true if removal was successful, false if it failed.
      */
-    public boolean removeBook(Book book)
+    private boolean remove(Book book)
     {
        return library.remove(book);
     }

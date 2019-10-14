@@ -43,7 +43,7 @@ public class Interface
 
             //this represents the main user interface menu
             switch (userInput) {
-                case 4:
+                case 5:
                     printFarewell();
                     exit = true;
                     break;
@@ -56,7 +56,7 @@ public class Interface
                 case 2:
                     addBook();
                     break;
-                case 5:
+                case 4:
                     removeBook();
                     break;
                 case 0:
@@ -95,11 +95,24 @@ public class Interface
         System.out.println("The book was successfully added to the library");
         System.out.println("###############################");
     }
+
+    /**
+     * Removes a book from the collection, using the EAN-13 reference number to identify the correct book.
+     */
     private void removeBook()
     {
-        System.out.println("Please enter the title, author or other \n detail of the book you wish to remove:");
+        System.out.println("Please enter the EAN-13 reference number of the book you wish to delete.");
+        System.out.println("Use the search function to find the correct reference.");
+        System.out.println("Warning: This will remove ALL books that share this reference number");
 
-
+        String userInput = reader.getStringInput();
+        if(library.findAndRemoveBook(userInput)){
+            System.out.println("Book successfully removed.");
+        }
+        else{
+            System.out.println("There was an error while attempting to remove the book. \n " +
+                                "Please double check the EAN-13 reference number.");
+        }
     }
 
     /**
@@ -175,7 +188,8 @@ public class Interface
         System.out.println("1. Search the library");
         System.out.println("2. Add a book.");
         System.out.println("3. List all books.");
-        System.out.println("4. Exit application.");
+        System.out.println("4. Remove a book.");
+        System.out.println("5. Exit application.");
         System.out.println("Please type the number of the service you require.");
     }
 
