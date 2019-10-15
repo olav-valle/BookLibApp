@@ -208,6 +208,9 @@ public class Interface
         System.out.println("###############################");
     }
 
+    /**
+     * Prints a message asking the user to input a valid number for a menu item .
+     */
     private void printInputError()
     {
         System.out.println("###############################");

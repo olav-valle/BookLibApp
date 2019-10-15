@@ -42,6 +42,7 @@ public class Library
      * Creates new Book instance, using the parameters given, by calling
      * Book constructor, and adds the new book to library using addBook method.
      */
+    //TODO refactor to Interface
     public void addBook(String bookTitle, String bookAuthor,
                         String bookPublisher,String publishingDate,
                         String bookPages, String ean13)
@@ -76,6 +77,8 @@ public class Library
      * @return Iterator containing the details of  all objects that match filter predicate.
      */
 
+    //TODO refactor to return book iterator instead of string.
+
     public Iterator<String> searchByKeyword(HashSet<String> keyword)
     {
         return (search(keyword)
@@ -90,10 +93,14 @@ public class Library
      * @param keyword HashSet containing the individual keywords as Strings
      * @return HashSet containing all objects that match the keyword.
      */
+
     //TODO should this return a HashSet containing the matched books?
     // The set should by its very nature only contain each book once,
     // even though a single book may match several of the keywords.
     // Will this cause issues if it tries to add the same book again?
+
+    //TODO make public and use to replace searchByKeyword
+
     private HashSet<Book> search(HashSet<String> keyword)
     {
         HashSet<Book> matchingBooks = new HashSet<Book>();
@@ -109,29 +116,26 @@ public class Library
      * Returns the collection object this instance holds.
      * @return The library collection.
      */
-    public ArrayList<Book> getCollection()
+    public int getLibrarySize()
     {
-	return library;
+	return library.size();
     }
 
     /**
      * Returns Iterator holding description strings for objects in collection.
      * @return Iterator holding descriptions of all books in collection.
      */
-    public Iterator<String> getDetailsIterator()
+    public Iterator<Book> getLibraryIterator()
     {
-        ArrayList<String> books = new ArrayList<>();
-        library.forEach(book -> books.add(book.detailString()));
-        return books.iterator();
+        return library.iterator();
     }
 
-    public String bookDetails(Book book)
-    {
-        return book.detailString();
-    }
     /**
      * Fills the library with a small collection of books for testing purposes.
      */
+
+    //TODO refactor to test, or set to DEBUG_ONLY?
+
     public void fillLibrary()
     {
         addBook("The Colour of Magic", "Terry Pratchett", "Corgi", "1985", "285", "9780552124751");
