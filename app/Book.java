@@ -1,4 +1,3 @@
-
 import java.util.Iterator;
 import java.util.List;
 
@@ -177,4 +176,5 @@ public class Book
     {
         return List.of(title, authorName, publisher, date, pages, ean13).iterator();
     }
+
 }

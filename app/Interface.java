@@ -71,7 +71,9 @@ public class Interface
      * Adds a book to the library collection, with details specified through user input.
      */
     private void addBook(){
+        System.out.println("###############################");
         System.out.println("Please fill in book details.");
+        System.out.println("###############################");
         System.out.println("Book title: ");
         String title = reader.getStringInput();
 
@@ -101,17 +103,23 @@ public class Interface
      */
     private void removeBook()
     {
+        System.out.println("###############################");
         System.out.println("Please enter the EAN-13 reference number of the book you wish to delete.");
         System.out.println("Use the search function to find the correct reference.");
         System.out.println("Warning: This will remove ALL books that share this reference number");
+        System.out.println("###############################");
 
         String userInput = reader.getStringInput();
         if(library.findAndRemoveBook(userInput)){
+            System.out.println("###############################");
             System.out.println("Book successfully removed.");
+            System.out.println("###############################");
         }
         else{
+            System.out.println("###############################");
             System.out.println("There was an error while attempting to remove the book. \n " +
                                 "Please double check the EAN-13 reference number.");
+            System.out.println("###############################");
         }
     }
 
@@ -122,15 +130,22 @@ public class Interface
     {
         System.out.println("###############################");
         System.out.print("Search: ");
+        System.out.println("###############################");
 
         HashSet<String> userInput = reader.getStringInputAsSet();
         Iterator<String> it = library.searchByKeyword(userInput);
 
-        if(it.hasNext()){ // check if iterator is empty, i.e. if search had any matches
+        if(it.hasNext()){ // if iterator is empty, the search had no matches
+            System.out.println("###############################");
             System.out.println("Match found. Showing details:");
+            System.out.println("###############################");
             printIterator(it);
         }
-        else { System.out.println("No match found");}
+        else {
+            System.out.println("###############################");
+            System.out.println("No match found");
+            System.out.println("###############################");
+        }
     }
 
 
@@ -139,7 +154,9 @@ public class Interface
      */
     private void listAllBooksIterator()
     {
+        System.out.println("###############################");
         System.out.println("Listing all books in collection.");
+        System.out.println("###############################");
         printIterator(library.getDetailsIterator());
 
     }
@@ -150,10 +167,7 @@ public class Interface
      */
     private void printIterator(Iterator<String> it)
     {
-        while(it.hasNext())
-        {
-            printBookDetails(it.next());
-        }
+        it.forEachRemaining(s -> printBookDetails(s));
 
         System.out.println();
         System.out.println("###############################");
@@ -191,11 +205,14 @@ public class Interface
         System.out.println("4. Remove a book.");
         System.out.println("5. Exit application.");
         System.out.println("Please type the number of the service you require.");
+        System.out.println("###############################");
     }
 
     private void printInputError()
     {
-        System.out.println("Please input a valid number.");
+        System.out.println("###############################");
+        System.out.println("Error: Please input a valid number.");
+        System.out.println("###############################");
     }
 
     /**

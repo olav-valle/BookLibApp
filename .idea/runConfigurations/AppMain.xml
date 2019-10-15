@@ -1,0 +1,31 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="AppMain" type="Application" factoryName="Application" nameIsGenerated="true" show_console_on_std_err="true" show_console_on_std_out="true">
+    <option name="MAIN_CLASS_NAME" value="AppMain" />
+    <module name="BookLibApp" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="AppMain" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+      <pattern>
+        <option name="PATTERN" value="Book" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+      <pattern>
+        <option name="PATTERN" value="InputReader" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+      <pattern>
+        <option name="PATTERN" value="Interface" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+      <pattern>
+        <option name="PATTERN" value="Library" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
