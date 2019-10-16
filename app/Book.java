@@ -41,6 +41,7 @@ public class Book
      * @param bookPages Number of pages in book.
      * @param ean13 EAN-13 reference number.
      */
+    //TODO add checks for null or invalid fields values
     public Book(String bookTitle, String bookAuthor, 
                 String bookPublisher, String publishingDate, 
                 String bookPages, String ean13)
@@ -114,42 +115,6 @@ public class Book
     public boolean getBorrowed() { return this.borrowed; }
 
     /**
-     * Returns a human readable string stating if the book is currently `available for loan or not.
-     * @return string saying if book is available for loan or not.
-     */
-    //TODO should this be refactored?
-    public String getBorrowedAsString()
-    {
-        String borrowedString;
-
-        if (borrowed) {
-            borrowedString = "This book is currently on loan.";
-        }
-        else {
-            borrowedString = "This book is available for loan";
-        }
-        return borrowedString;
-    }
-
-    /**
-     * Human readable print formatted string of book details.
-     * @return Human readable book details.
-     */
-    //TODO Refactor!
-
-    public String detailString()
-    {
-        return  "Book title:       " + this.title + "\n" +
-                "Author:           " + this.authorName + "\n" +
-                "Publisher:        " + this.publisher + "\n" +
-                "Date Published:   " + this.date + "\n" +
-                "Number of pages:  " + this.pages + "\n" +
-                "EAN-13 reference: " + this.ean13 + "\n" +
-                getBorrowedAsString();
-
-    }
-
-    /**
      * Compares keyword parameter with the book's details (title, author name etc.),
      * and returns a boolean true if a match is found, and false if no match is found.
       * @param keyword the keyword to compare with book details.
@@ -161,8 +126,8 @@ public class Book
         while (it.hasNext() && !match) {
             if (it.next().toLowerCase().contains(keyword)) {
                 match = true;
-            }
-        }
+            }// if
+        }// while
         return match;
     }
 
@@ -174,5 +139,4 @@ public class Book
     {
         return List.of(title, authorName, publisher, date, pages, ean13).iterator();
     }
-
-}
+}// class Book

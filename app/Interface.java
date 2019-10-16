@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 /**
@@ -91,11 +92,19 @@ public class Interface
 
         System.out.println("EAN-13 reference number: ");
         String ean13 = reader.getStringInput();
+        // finished asking user for input
 
-        library.addBook(title, author, publisher, date, pages, ean13);
-        System.out.println("###############################");
-        System.out.println("The book was successfully added to the library");
-        System.out.println("###############################");
+        //TODO add check to test the user input values are valid, before sending to book object?
+        Book newBook = new Book(title, author, publisher, date, pages, ean13); //construct new Book
+
+        if(library.addBook(newBook)){ //create book and add to library
+            System.out.println("###############################");
+            System.out.println("The book \"" + newBook.getTitle() + "\" was successfully added to the library");
+            System.out.println("Please confirm below that all details were correctly filled.");
+            printBookDetails(newBook);
+        }
+        else{ System.out.println("Failed to add book. Please confirm that all fields are correctly filled.");}
+
     }
 
     /**
@@ -110,6 +119,7 @@ public class Interface
         System.out.println("###############################");
 
         String userInput = reader.getStringInput();
+        //TODO add a confirmation dialogue
         if(library.findAndRemoveBook(userInput)){
             System.out.println("###############################");
             System.out.println("Book successfully removed.");
@@ -130,12 +140,11 @@ public class Interface
     {
         System.out.println("###############################");
         System.out.print("Search: ");
-        System.out.println("###############################");
 
         HashSet<String> userInput = reader.getStringInputAsSet();
         Iterator<Book> it = library.searchByKeyword(userInput).iterator();
 
-        if(it.hasNext()){ // if iterator is empty, the search had no matches
+        if(it.hasNext()){ // if iterator has objects, we assume the search had matches
             System.out.println("###############################");
             System.out.println("Match found. Showing details:");
             System.out.println("###############################");
@@ -146,20 +155,20 @@ public class Interface
             System.out.println("No match found");
             System.out.println("###############################");
         }
-    }
+    } //searchByKeyword
 
 
     /**
      * Prints the details about each book stored in the collection.
      */
+    //TODO Sort alphabetically before listing?
     private void listAllBooksIterator()
     {
         System.out.println("###############################");
-        System.out.println("Listing all books in collection.");
+        System.out.println("Listing all " + library.getLibrarySize() + " books in collection.");
         System.out.println("###############################");
         printIterator(library.getLibraryIterator());
-
-    }
+    } //listAllBooksIterator
 
     /**
      * Prints all String objects held in the provided Iterator
@@ -174,15 +183,23 @@ public class Interface
         System.out.println("###############################");
         System.out.println("          End of list.");
         System.out.println("###############################");
-    }
+    } //printIterator
 
     /**
-     * Prints the String object provided as parameter, with some surrounding formatting.
+     * Prints the details of the Book object provided as parameter,
+     * with some surrounding formatting.
      * Example output:
-     *                 "Text contained in string."
-     *                 <empty line>
-     *                 ###############################
-     *                 <empty line>
+     *
+     *  <empty line>
+     *  ###############################
+     *  <empty line>
+     *  Book title:       Title
+     *  Author:           Name
+     *  Publisher:        Publisher
+     *  Date Published:   20xx
+     *  Number of pages:  100
+     *  EAN-13 reference: 1234567891011
+     *  This book is [currently on loan]/[available for loan]
      * @param book The book whose details shall be printed.
      */
     //TODO test for book being null
@@ -201,6 +218,7 @@ public class Interface
             else { System.out.println("This book is available for loan."); }
         } // if null
     }// printBookDetails
+
     /**
      * Prints the menu that shows the available program functions to the user.
      */
@@ -213,9 +231,9 @@ public class Interface
         System.out.println("3. List all books.");
         System.out.println("4. Remove a book.");
         System.out.println("5. Exit application.");
-        System.out.println("Please type the number of the service you require.");
+        System.out.println("Please enter the number of the service you require.");
         System.out.println("###############################");
-    }
+    } //printWelcome
 
     /**
      * Prints a message asking the user to input a valid number for a menu item .
@@ -225,7 +243,7 @@ public class Interface
         System.out.println("###############################");
         System.out.println("Error: Please input a valid number.");
         System.out.println("###############################");
-    }
+    } //printInputError
 
     /**
      * Prints a farewell message to the user.
@@ -233,5 +251,5 @@ public class Interface
     private void printFarewell()
     {
         System.out.println("Thank you. Goodbye.");
-    }
+    } //printFarewell
 }

@@ -31,23 +31,20 @@ public class Library
     }
 
     /**
-     * Add an existing book object to list
+     * Add an existing book object to library collection.
+     * @param existingBook a Book type object
+     * @return boolean true if book was successfully added to collection, false if it failed (or if parameter was null)
      */
-    private void addBook(Book existingBook)
+    public boolean addBook(Book existingBook)
     {
-        this.library.add(existingBook);
-    }
-
-    /**
-     * Creates new Book instance, using the parameters given, by calling
-     * Book constructor, and adds the new book to library using addBook method.
-     */
-    //TODO refactor to Interface
-    public void addBook(String bookTitle, String bookAuthor,
-                        String bookPublisher,String publishingDate,
-                        String bookPages, String ean13)
-    {
-        addBook(new Book(bookTitle, bookAuthor, bookPublisher, publishingDate, bookPages, ean13));
+        boolean wasBookAdded;
+        if(existingBook != null){
+            wasBookAdded = this.library.add(existingBook); // Collection.add() returns boolean
+        }
+        else{
+            wasBookAdded = false;
+        }
+        return wasBookAdded;
     }
 
     /**
@@ -61,30 +58,12 @@ public class Library
        return library.removeIf(b -> b.getRefNumber().equals(ean13));
     }
 
-    /**
-     * Remove a book from the collection.
-     * @param book The book to be removed.
-     * @return true if removal was successful, false if it failed.
-     */
-    private boolean remove(Book book)
-    {
-       return library.remove(book);
-    }
-
 
     /**
      * Filters the objects in the library using the HashSet of keywords provided.
      * @param keyword HashSet containing the individual keywords as Strings
      * @return HashSet containing all objects that match the keyword.
      */
-
-    //TODO should this return a HashSet containing the matched books?
-    // The set should by its very nature only contain each book once,
-    // even though a single book may match several of the keywords.
-    // Will this cause issues if it tries to add the same book again?
-
-    //TODO make public and use to replace searchByKeyword
-
     public HashSet<Book> searchByKeyword(HashSet<String> keyword)
     {
         HashSet<Book> matchingBooks = new HashSet<>();
@@ -122,13 +101,13 @@ public class Library
 
     public void fillLibrary()
     {
-        addBook("The Colour of Magic", "Terry Pratchett", "Corgi", "1985", "285", "9780552124751");
-        addBook("The Light Fantastic", "Terry Pratchett", "Corgi", "1986", "241", "9780061020704");
-        addBook("A first course in machine learning (Second edition)", "Simon Rogers, Mark Girolami", "CRC Press", "2017", "397","9781498738484");
-        addBook("The Shadow of the Torturer", "Gene Wolfe", "Tom Doherty Associates, Inc.", "1982", "262", "9780671540661");
-        addBook("Molecular Gastronomy: Exploring the science of Flavor", "Hervé This", "Columbia University Press", "2006", "377", "9780231133128");
-        addBook("Les Halles Cookbook", "Anthony Bourdain", "Bloomsbury", "2004", "304", "9780747580126");
-        addBook("Larousse Gastronomique", "Prosper Montagné", "Éditions Larousse", "1938", "1087", "9780600620426");
+        addBook(new Book("The Colour of Magic", "Terry Pratchett", "Corgi", "1985", "285", "9780552124751"));
+        addBook(new Book("The Light Fantastic", "Terry Pratchett", "Corgi", "1986", "241", "9780061020704"));
+        addBook(new Book("A first course in machine learning (Second edition)", "Simon Rogers, Mark Girolami", "CRC Press", "2017", "397","9781498738484"));
+        addBook(new Book("The Shadow of the Torturer", "Gene Wolfe", "Tom Doherty Associates, Inc.", "1982", "262", "9780671540661"));
+        addBook(new Book("Molecular Gastronomy: Exploring the science of Flavor", "Hervé This", "Columbia University Press", "2006", "377", "9780231133128"));
+        addBook(new Book("Les Halles Cookbook", "Anthony Bourdain", "Bloomsbury", "2004", "304", "9780747580126"));
+        addBook(new Book("Larousse Gastronomique", "Prosper Montagné", "Éditions Larousse", "1938", "1087", "9780600620426"));
     }
 
 }
