@@ -35,7 +35,6 @@ public class Interface
     {
         boolean exit = false;
 
-
         while(!exit)
         {
             printWelcome();
@@ -44,24 +43,24 @@ public class Interface
 
             //this represents the main user interface menu
             switch (userInput) {
-                case 5:
-                    printFarewell();
-                    exit = true;
+                case 0: //user has input a non-int value
+                    printInputError();
                     break;
-                case 1:
+                case 1: //user started a library search
                     searchByKeyword();
                     break;
-                case 3:
-                    listAllBooksIterator();
-                    break;
-                case 2:
+                case 2: //user wishes to add a book to the collection
                     addBook();
                     break;
-                case 4:
+                case 3: //user requested a list of all books in collection
+                    listAllBooksIterator();
+                    break;
+                case 4: //user wishes to remove a book from the collection
                     removeBook();
                     break;
-                case 0:
-                    printInputError();
+                case 5: //user has issued shut down command
+                    printFarewell();
+                    exit = true;
                     break;
             }
 
