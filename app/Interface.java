@@ -133,7 +133,7 @@ public class Interface
         System.out.println("###############################");
 
         HashSet<String> userInput = reader.getStringInputAsSet();
-        Iterator<String> it = library.searchByKeyword(userInput);
+        Iterator<Book> it = library.searchByKeyword(userInput).iterator();
 
         if(it.hasNext()){ // if iterator is empty, the search had no matches
             System.out.println("###############################");
@@ -163,11 +163,12 @@ public class Interface
 
     /**
      * Prints all String objects held in the provided Iterator
-     * @param it Iterator<String> holding objects to print.
+     * @param it Iterator<Book> holding objects to print.
      */
-    private void printIterator(Iterator<String> it)
+    //TODO test for iterator and/or book in iterator being null
+    private void printIterator(Iterator<Book> it)
     {
-        it.forEachRemaining(s -> printBookDetails(s));
+        it.forEachRemaining(b -> printBookDetails(b));
 
         System.out.println();
         System.out.println("###############################");
@@ -182,16 +183,24 @@ public class Interface
      *                 <empty line>
      *                 ###############################
      *                 <empty line>
-     * @param details String that is to be printed.
+     * @param book The book whose details shall be printed.
      */
-    private void printBookDetails(String details)
-    {
-        System.out.println();
-        System.out.println("###############################");
-        System.out.println();
-        System.out.println(details);
-    }
-
+    //TODO test for book being null
+    private void printBookDetails(Book book) {
+        if (book != null) {
+            System.out.println();
+            System.out.println("###############################");
+            System.out.println();
+            System.out.println("Book title:       " + book.getTitle());
+            System.out.println("Author:           " + book.getAuthorName());
+            System.out.println("Publisher:        " + book.getPublisher());
+            System.out.println("Date Published:   " + book.getDate());
+            System.out.println("Number of pages:  " + book.getPages());
+            System.out.println("EAN-13 reference: " + book.getRefNumber());
+            if (book.getBorrowed()) { System.out.println("This book is currently on loan."); }
+            else { System.out.println("This book is available for loan."); }
+        } // if null
+    }// printBookDetails
     /**
      * Prints the menu that shows the available program functions to the user.
      */

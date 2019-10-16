@@ -71,22 +71,6 @@ public class Library
        return library.remove(book);
     }
 
-    /**
-     * Returns iterator containing all objects in collection that match the given keyword.
-     * @param keyword The keywords to search for.
-     * @return Iterator containing the details of  all objects that match filter predicate.
-     */
-
-    //TODO refactor to return book iterator instead of string.
-
-    public Iterator<String> searchByKeyword(HashSet<String> keyword)
-    {
-        return (search(keyword)
-                .stream() // passes keyword set to search method
-                .map(Book::detailString) // calls on details of books in set of matching books
-                .collect(Collectors.toCollection(HashSet::new))) // collects the detail strings in HashSet
-                .iterator(); // returns iterator for the set of detail strings
-    }
 
     /**
      * Filters the objects in the library using the HashSet of keywords provided.
@@ -101,7 +85,7 @@ public class Library
 
     //TODO make public and use to replace searchByKeyword
 
-    private HashSet<Book> search(HashSet<String> keyword)
+    public HashSet<Book> searchByKeyword(HashSet<String> keyword)
     {
         HashSet<Book> matchingBooks = new HashSet<>();
 
