@@ -103,7 +103,7 @@ public class Library
 
     private HashSet<Book> search(HashSet<String> keyword)
     {
-        HashSet<Book> matchingBooks = new HashSet<Book>();
+        HashSet<Book> matchingBooks = new HashSet<>();
 
         keyword.forEach(word -> // for each word in the keyword set
                 library.stream()

@@ -157,7 +157,7 @@ public class Interface
         System.out.println("###############################");
         System.out.println("Listing all books in collection.");
         System.out.println("###############################");
-        printIterator(library.getDetailsIterator());
+        printIterator(library.getLibraryIterator());
 
     }
 
