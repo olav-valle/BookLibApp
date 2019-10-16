@@ -93,7 +93,7 @@ public class Interface
         String ean13 = reader.getStringInput();
         // finished asking user for input
 
-        //TODO add check to test the user input values are valid, before sending to book object?
+        //TODO ?? add check to test the user input values are valid, before sending to book object?
         Book newBook = new Book(title, author, publisher, date, pages, ean13); //construct new Book
 
         if(library.addBook(newBook)){ //create book and add to library
@@ -160,7 +160,7 @@ public class Interface
     /**
      * Prints the details about each book stored in the collection.
      */
-    //TODO Sort alphabetically before listing?
+    //TODO ?? Sort alphabetically before listing?
     private void listAllBooksIterator()
     {
         System.out.println("###############################");

@@ -97,7 +97,7 @@ public class Library
      * Fills the library with a small collection of books for testing purposes.
      */
 
-    //TODO refactor to test, or set to DEBUG_ONLY?
+    //TODO refactor to test class, or set to DEBUG_ONLY?
 
     public void fillLibrary()
     {
