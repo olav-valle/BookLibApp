@@ -1,138 +1,116 @@
-import java.lang.Object;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
-import java.util.stream.Collectors;
+
 /**
  * A library class that creates and manages an ArrayList of Book objects.
  * 
  * Books can be added, and a list of books in library can be printed.
  * 
  * @author Olav Valle   
- * @version 20190908
+ * @version 2019/10/17
  */
+
+//TODO reconsider storing object collection as HashMap instead of ArrayList
+    
+@SuppressWarnings("WeakerAccess")
 public class Library
 {
     // only field is the ArrayList holding the books
     private ArrayList<Book> library;
     
     /**
-     * Constructor for objects of class Library
+     * Constructor
      */
     public Library()
     {
         // initialise library as ArrayList object of type Book 
-        library = new ArrayList<Book>();
-    }
-    
-    /**
-     * Add an existing book object to list
-     */
-    public void addBook(Book existingBook)
-    {
-        this.library.add(existingBook);
-    }
-    
-    /**
-     * Creates new Book instance, using the parameters given, by calling 
-     * Book constructor, and adds the new book to library using addBook method.
-     */
-    
-    public void addBook(String bookTitle, String bookAuthor, 
-                        String bookPublisher,String publishingDate, 
-                        String bookPages, String ean13)
-    {
-        Book newBook = new Book(bookTitle, bookAuthor, bookPublisher, 
-                                publishingDate, bookPages, ean13);
-        addBook(newBook);
+        library = new ArrayList<>();
     }
 
-    /*
-     * Iterates over each book in library through invokeAllMethods,
-     * and checks the return of each method against the keyword specified
-     * by the user.
-     *
-     * Warning: see invokeAllMethods method below.
-     *
-     * @param kw User input keyword for search
-     * @return Iterator of book objects that match search criteria
+    /**
+     * Add an existing book object to library collection.
+     * @param existingBook a Book type object
+     * @return boolean true if book was successfully added to collection, false if it failed (or if parameter was null)
      */
-    
-    /*public Iterator<Book> filterByKeyword(String kw)
+    public boolean addBook(Book existingBook)
     {
-        //Iterator<Book> it = getIterator();
-
-        for(Book b : library) {
-            invokeAllMethods(b).toString().toLowerCase(); 
-        //TODO: how do I collect all the returns from invokeAllMethods??
-            // as some collection, and then iterate with .contains?
-            if (contains(kw);
+        boolean wasBookAdded;
+        if(existingBook != null){
+            wasBookAdded = this.library.add(existingBook); // Collection.add() returns boolean
         }
-    }
-    */
-    
-    /**
-     * invokes each of the "get" methods belonging to the Object.
-     * Obvious warning is that ANY method with "get" in name will be called,
-     * even if it is not an accessor method.
-     * @param obj Object whose methods are to be called
-     * @return
-     */
-    public Object invokeAllMethods(Object obj)
-            throws IllegalAccessException, InvocationTargetException
-    {
-        //Arrays.stream(methods).forEach(m -> System.out.println(m.invoke(obj)));
-        Method[] met = obj.getClass().getDeclaredMethods();
-        
-        for(Method m : met)
-        {
-            if (m.getName().contains("get"))
-            {
-                try {
-                    return (m.invoke(obj));
-                    //System.out.println(m.invoke(obj));
-                } catch (InvocationTargetException e) {
-                    System.out.println("InvocationTargetException : method being invoked probably threw an exception? I don't know...");
-                    throw e;
-                } catch (IllegalAccessException e) {
-                    System.out.println("IllegalAccessException : method being invoked is not accessible from here? I don't know...");
-                    throw e;
-                }
-            }
+        else{
+            wasBookAdded = false;
         }
-        return obj;
+        return wasBookAdded;
     }
 
-    /* The previous attempt. Can't deal with all the lambda exception handling bullshit...
-     List<Book> matchingBook = library.stream()
-     .filter(b -> ((Search.invokeAllMethods(b)).toString().toLowerCase()).contains(kw))
-     .collect(Collectors.toList());
-     return matchingBook.iterator();
-    */
+    /**
+     * Locates a book in the collection using its EAN-13 reference number (exact match),
+     * and then removes it from the library.
+     * @param ean13 The EAN-13 (ISBN) number of the book, as String type.
+     * @return True if book was removed successfully, false if book was not removed or if parameter ean13 was null.
+     */
+    //TODO what if library contains null object?
+    public boolean findAndRemoveBook(String ean13)
+    {
+        if(ean13 != null){ return library.removeIf(b -> b.getRefNumber().equals(ean13));}
+        else { return false; }
+    }
 
 
     /**
-    * Method to filter a stream of the library ArrayList, and retun the filtered results as a list.
-    */
-    public Iterator<Book> filterByAuthor(String author)
+     * Filters the objects in the library using the HashSet of keywords provided.
+     * @param keyword HashSet containing the individual keywords as Strings
+     * @return HashSet containing all objects that match the keyword.
+     */
+    public HashSet<Book> searchByKeyword(HashSet<String> keyword) {
+        HashSet<Book> matchingBooks = new HashSet<>();
+
+        if (keyword != null) { //skips the search stream, and returns the empty HashSet if keyword object was null
+            keyword.forEach(word -> // for each word in the keyword set
+                    library.stream()
+                           .filter(b -> b.matchDetails(word)) // ask each book if it matches keyword
+                           .forEach(matchingBooks::add)); // add books that match to the set
+        }
+        return matchingBooks; // return the set of book objects that match the keyword.
+
+    }
+    /**
+     * Returns the collection object this instance holds.
+     * @return The library collection.
+     */
+    public int getLibrarySize()
     {
-	String aut = author;
-	List<Book> matchingAuthor = library.stream()
-	    .filter(b -> aut.equals(b.getName().toLowerCase()))
-	    .collect(Collectors.toList());
-	    return matchingAuthor.iterator();
+	return library.size();
     }
 
-    public ArrayList<Book> getCollection()
+    /**
+     * Returns Iterator holding description strings for objects in collection.
+     * @return Iterator holding descriptions of all books in collection.
+     */
+    //TODO how do I test this?
+    public Iterator<Book> getLibraryIterator()
     {
-	return library;
+        return library.iterator();
     }
-     
-    public Iterator<Book> getIterator()
+
+    /**
+     * Fills the library with a small collection of books for testing purposes.
+     */
+
+    //TODO refactor to test class, or set to DEBUG_ONLY?
+
+    @SuppressWarnings("SpellCheckingInspection")
+    public void fillLibrary()
     {
-	return library.iterator();
+        addBook(new Book("The Colour of Magic", "Terry Pratchett", "Corgi", "1985", "285", "9780552124751"));
+        addBook(new Book("The Light Fantastic", "Terry Pratchett", "Corgi", "1986", "241", "9780061020704"));
+        addBook(new Book("A first course in machine learning (Second edition)", "Simon Rogers, Mark Girolami", "CRC Press", "2017", "397","9781498738484"));
+        addBook(new Book("The Shadow of the Torturer", "Gene Wolfe", "Tom Doherty Associates, Inc.", "1982", "262", "9780671540661"));
+        addBook(new Book("Molecular Gastronomy: Exploring the science of Flavor", "Hervé This", "Columbia University Press", "2006", "377", "9780231133128"));
+        addBook(new Book("Les Halles Cookbook", "Anthony Bourdain", "Bloomsbury", "2004", "304", "9780747580126"));
+        addBook(new Book("Larousse Gastronomique", "Prosper Montagné", "Éditions Larousse", "1938", "1087", "9780600620426"));
     }
 
 }

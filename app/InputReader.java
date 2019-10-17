@@ -7,8 +7,11 @@ import java.util.Arrays;
  * The text typed by a user is returned.
  * 
  * @author     Olav Valle
- * @version    0.2
+ * @version    2019/10/17
  */
+
+//TODO How do I test a Scanner?
+@SuppressWarnings("WeakerAccess")
 public class InputReader
 {
     private Scanner reader;
@@ -23,44 +26,44 @@ public class InputReader
 
     /**
      * Read a line of text from standard input (the text terminal),
-     * and return it as a String.
-     *
-     * @return  A String typed by the user.
+     * separate the individual words, and return them as a HashSet.
+     * @return  HashSet containing the words the user has typed.
      */
-    public HashSet<String>  getStringInputAsSet()
+    public HashSet<String> getStringInputAsSet()
     {
         System.out.print("> ");         // print prompt
 	
-	//get user input as String
-	String inputLine = reader.nextLine();
-	//separate input String into individual words
-	String[] wordsAsArray = inputLine.split(" ");
-	//collect word Strings in a Set
-	HashSet<String> wordSet = new HashSet<>(Arrays.asList(wordsAsArray));
-        return (wordSet); //return Set of user input words
-    }
-
-    public String getStringInput()
-    {
-	System.out.print("> ");         // print prompt
-	
-	//get user input as String
-	String inputLine = reader.nextLine();
-	//separate input String into individual words
-	return inputLine;
+	    //get user input as String
+	    String inputLine = this.reader.nextLine().toLowerCase();
+	    //separate input String into individual words
+	    String[] wordsAsArray = inputLine.split(" ");
+	    //return a set of word Strings
+        return (new HashSet<>(Arrays.asList(wordsAsArray)));
     }
 
     /**
-    * Read integer input from stdin, and returns it to caller.
-    *
-    *@return An integer typed by user.
+     * Returns user input as a String.
+     * @return user input String.
+     */
+    public String getStringInput()
+    {
+	System.out.print("> ");         // print prompt
+	return reader.nextLine();
+    }
+
+    /**
+    * Returns user input as integer value, or 0 if user input is not int.
+    *@return An integer typed by user, or 0 if input is not int.
     */
     public int getIntInput() 
     {
-	
+        int inputInt;
         System.out.print("> ");         // print prompt
-        int inputInt = reader.nextInt();
-	reader.nextLine(); //solves problem of leaving a line break behind
+
+        if(!(reader.hasNextInt())) { inputInt = 0; }
+        else { inputInt = reader.nextInt(); }
+
+        reader.nextLine();  //solves problem of leaving a line break behind
         return inputInt;
     }
 }
