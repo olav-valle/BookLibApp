@@ -135,7 +135,7 @@ public class Book
         boolean match = false;
         Iterator<String> it = detailsIterator();
         while (keyword != null && it.hasNext() && !match) {
-            if (it.next().toLowerCase().contains(keyword)) {
+            if (it.next().toLowerCase().contains(keyword.toLowerCase())) {
                 match = true;
             }// if
         }// while

@@ -7,41 +7,23 @@ import java.util.Iterator;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * The test class LibraryTest.
+ * The test class for the Library class.
  *
- * @author  (your name)
- * @version (a version number or a date)
+ * @author  Olav Valle
+ * @version 2019/10/17
  */
 public class LibraryTest
 {
     private Library library1;
 
-    /**
-     * Default constructor for test class LibraryTest
-     */
     public LibraryTest()
     {
     }
 
-    /**
-     * Sets up the test fixture.
-     *
-     * Called before every test case method.
-     */
     @BeforeEach
     public void setUp()
     {
         library1 = new Library();
-    }
-
-    /**
-     * Tears down the test fixture.
-     *
-     * Called after every test case method.
-     */
-    @AfterEach
-    public void tearDown()
-    {
     }
 
     @Test
@@ -54,6 +36,14 @@ public class LibraryTest
     public void testFindAndRemoveWithNull()
     {
         assertFalse(library1.findAndRemoveBook(null));
+    }
+
+    @Test
+    public void testFindAndRemove()
+    {
+        library1.addBook(new Book("","","",
+                "","","1234567891011")); //add book with known EAN13
+        assertTrue(library1.findAndRemoveBook("1234567891011")); //assert that removing the above book succeeds
     }
 
     @Test

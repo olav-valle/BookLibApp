@@ -5,46 +5,53 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * The test class BookTest.
+ * The test class for the Book class.
  *
- * @author  (your name)
- * @version (a version number or a date)
+ * @author  Olav Valle
+ * @version 2019/10/17
  */
 public class BookTest
 {
     private Book testBook;
-    /**
-     * Default constructor for test class BookTest
-     */
+
     public BookTest()
     {
+        //nothing to construct
     }
 
-    /**
-     * Sets up the test fixture.
-     *
-     * Called before every test case method.
-     */
     @BeforeEach
     public void setUp()
     {
-        testBook = new Book("test", "test", "test", "test", "test", "test");
+       testBook = new Book("Title", "Author", "Publisher",
+               "Date", "Pages", "EAN-13");
     }
 
     /**
-     * Tears down the test fixture.
-     *
-     * Called after every test case method.
+     * Assert that the other fields in the object are correctly created, even if one parameter is null
      */
-    @AfterEach
-    public void tearDown()
+    @Test
+    public void newBookWithOneNullParameter()
     {
+        Book nullTitleBook = new Book(null, "Author", "Publisher",
+                "Date", "Pages", "EAN-13");
+
+        assertEquals("PARAMETER_WAS_NULL", nullTitleBook.getTitle()); // should have been set to default value
+        assertEquals("Author", nullTitleBook.getAuthorName());
+        assertEquals("Publisher", nullTitleBook.getPublisher());
+        assertEquals("Date", nullTitleBook.getDate());
+        assertEquals("Pages", nullTitleBook.getPages());
+        assertEquals("EAN-13", nullTitleBook.getRefNumber());
     }
 
+    /**
+     * Asserts that all fields are correctly initialized to default value if the constructor is passed only null parameters.
+     */
     @Test
     public void newBookWithNullParameters()
     {
-        Book nullBook = new Book(null, null, null, null, null, null);
+        Book nullBook = new Book(null, null, null,
+                null, null, null);
+
         assertEquals("PARAMETER_WAS_NULL", nullBook.getAuthorName());
         assertEquals("PARAMETER_WAS_NULL", nullBook.getDate());
         assertEquals("PARAMETER_WAS_NULL", nullBook.getPages());
@@ -53,22 +60,44 @@ public class BookTest
         assertEquals("PARAMETER_WAS_NULL", nullBook.getRefNumber());
     }
 
+    /**
+     * Asserts that all getters return the field values initialized in setUp
+     */
     @Test
     void testAllGetMethods() {
-        assertEquals("test", testBook.getTitle());
-        assertEquals("test", testBook.getAuthorName());
-        assertEquals("test", testBook.getPublisher());
-        assertEquals("test", testBook.getDate());
-        assertEquals("test", testBook.getPages());
-        assertEquals("test", testBook.getRefNumber());
-        assertTrue(testBook.getAvailable());
+        assertEquals("Title", testBook.getTitle());
+        assertEquals("Author", testBook.getAuthorName());
+        assertEquals("Publisher", testBook.getPublisher());
+        assertEquals("Date", testBook.getDate());
+        assertEquals("Pages", testBook.getPages());
+        assertEquals("EAN-13", testBook.getRefNumber());
+        assertTrue(testBook.getAvailable()); //asserts that the "available" field was initialized to true
     }
 
+    /**
+     * Asserts that a book will not find false positives for a keyword its fields do not contain.
+     */
     @Test
-    void matchDetails() {
-        assertTrue(testBook.matchDetails("test"));
+    void matchDetailsFalse() {
+        assertFalse(testBook.matchDetails("test"));
     }
 
+    /**
+     * Asserts that a book will find matches for keywords in all its String fields.
+     */
+    @Test
+    void matchDetailsTrue() {
+        assertTrue(testBook.matchDetails("Title"));
+        assertTrue(testBook.matchDetails("Author"));
+        assertTrue(testBook.matchDetails("Publisher"));
+        assertTrue(testBook.matchDetails("Date"));
+        assertTrue(testBook.matchDetails("Pages"));
+        assertTrue(testBook.matchDetails("EAN-13"));
+    }
+
+    /**
+     * Asserts that a book will not find a false positive if keyword parameter is null.
+     */
     @Test
     public void matchDetailsWithNullKeyword()
     {
