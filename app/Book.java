@@ -7,6 +7,7 @@ import java.util.List;
  * @author Olav Valle
  * @version 2019/10/17
  */
+@SuppressWarnings("WeakerAccess")
 public class Book
 {
     private String title;
@@ -64,10 +65,10 @@ public class Book
         this.available = true;
     }
 
-    // TODO: Add mutators for other fields, 
+    // TODO: Add mutator for other fields,
     // e.g. in case original entry was misspelled?
 
-// -------------------- mutators --------------------
+// -------------------- mutator --------------------
 
     /**
      * Set borrowed status as boolean value.

@@ -11,6 +11,7 @@ import java.util.Arrays;
  */
 
 //TODO How do I test a Scanner?
+@SuppressWarnings("WeakerAccess")
 public class InputReader
 {
     private Scanner reader;

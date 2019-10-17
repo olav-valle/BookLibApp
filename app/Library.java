@@ -1,9 +1,6 @@
-import java.security.cert.CollectionCertStoreParameters;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * A library class that creates and manages an ArrayList of Book objects.
@@ -16,6 +13,7 @@ import java.util.stream.Collectors;
 
 //TODO reconsider storing object collection as HashMap instead of ArrayList
     
+@SuppressWarnings("WeakerAccess")
 public class Library
 {
     // only field is the ArrayList holding the books
@@ -103,6 +101,7 @@ public class Library
 
     //TODO refactor to test class, or set to DEBUG_ONLY?
 
+    @SuppressWarnings("SpellCheckingInspection")
     public void fillLibrary()
     {
         addBook(new Book("The Colour of Magic", "Terry Pratchett", "Corgi", "1985", "285", "9780552124751"));
