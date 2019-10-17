@@ -5,7 +5,7 @@ import java.util.List;
  * A class that maintains information on a book.
  *
  * @author Olav Valle
- * @version 0.2-20190908
+ * @version 2019/10/17
  */
 public class Book
 {

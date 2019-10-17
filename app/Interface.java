@@ -7,7 +7,7 @@ import java.util.Iterator;
  * All print functionality is handled by this class,
  * while input and the library is handled externally.
  *@author Olav Valle
- *@version 0.1-20190924
+ *@version 2019/10/17
  */
 
 public class Interface

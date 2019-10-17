@@ -7,7 +7,7 @@ import java.util.Arrays;
  * The text typed by a user is returned.
  * 
  * @author     Olav Valle
- * @version    0.2
+ * @version    2019/10/17
  */
 
 //TODO How do I test a Scanner?

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * Books can be added, and a list of books in library can be printed.
  * 
  * @author Olav Valle   
- * @version 20190908
+ * @version 2019/10/17
  */
 
 //TODO reconsider storing object collection as HashMap instead of ArrayList
