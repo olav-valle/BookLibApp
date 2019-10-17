@@ -51,11 +51,13 @@ public class Library
      * Locates a book in the collection using its EAN-13 reference number (exact match),
      * and then removes it from the library.
      * @param ean13 The EAN-13 (ISBN) number of the book, as String type.
-     * @return True if book was removed successfully, false if book was not removed.
+     * @return True if book was removed successfully, false if book was not removed or if parameter ean13 was null.
      */
+    //TODO what if library contains null object?
     public boolean findAndRemoveBook(String ean13)
     {
-       return library.removeIf(b -> b.getRefNumber().equals(ean13));
+        if(ean13 != null){ return library.removeIf(b -> b.getRefNumber().equals(ean13));}
+        else { return false; }
     }
 
 
@@ -64,14 +66,15 @@ public class Library
      * @param keyword HashSet containing the individual keywords as Strings
      * @return HashSet containing all objects that match the keyword.
      */
-    public HashSet<Book> searchByKeyword(HashSet<String> keyword)
-    {
+    public HashSet<Book> searchByKeyword(HashSet<String> keyword) {
         HashSet<Book> matchingBooks = new HashSet<>();
 
-        keyword.forEach(word -> // for each word in the keyword set
-                library.stream()
-                       .filter(b -> b.matchDetails(word)) // ask each book if it matches keyword
-                       .forEach(matchingBooks::add)); // add books that match to the set
+        if (keyword != null) { //skips the search stream, and returns the empty HashSet if keyword object was null
+            keyword.forEach(word -> // for each word in the keyword set
+                    library.stream()
+                           .filter(b -> b.matchDetails(word)) // ask each book if it matches keyword
+                           .forEach(matchingBooks::add)); // add books that match to the set
+        }
         return matchingBooks; // return the set of book objects that match the keyword.
 
     }

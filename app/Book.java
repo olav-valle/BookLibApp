@@ -18,7 +18,7 @@ public class Book
     // using String for EAN-13 for now.
     // possible to change to Long, for arithmetic
     // TODO: find and implement an EAN-13 generator class?
-    private boolean borrowed;
+    private boolean available;
 
 
     /**
@@ -29,6 +29,8 @@ public class Book
      *
      * Class does not contain methods for changing String fields
      * after initialisation
+     *
+     * If null parameters are passed, the related fields are set to "PARAMETER_WAS_NULL"
      *
      * Warning: EAN-13 String does not demand 13 characters, and is only
      * placeholder for functional IAN/EAN-13 encoding.
@@ -41,18 +43,25 @@ public class Book
      * @param bookPages Number of pages in book.
      * @param ean13 EAN-13 reference number.
      */
-    //TODO add checks for null or invalid fields values
+
     public Book(String bookTitle, String bookAuthor, 
                 String bookPublisher, String publishingDate, 
                 String bookPages, String ean13)
     {
-        this.title = bookTitle;
-        this.authorName = bookAuthor;
-        this.publisher = bookPublisher;
-        this.date = publishingDate;
-        this.pages = bookPages;        
-        this.ean13 = ean13;
-        this.borrowed = false;
+
+        if (bookTitle == null) {this.title = "PARAMETER_WAS_NULL";} else { this.title = bookTitle; }
+
+        if (bookAuthor == null) {this.authorName = "PARAMETER_WAS_NULL";} else { this.authorName = bookAuthor; }
+
+        if (bookPublisher == null) {this.publisher = "PARAMETER_WAS_NULL";} else { this.publisher = bookPublisher; }
+
+        if (publishingDate == null) {this.date = "PARAMETER_WAS_NULL";} else { this.date = publishingDate; }
+
+        if (bookPages == null) {this.pages = "PARAMETER_WAS_NULL";} else { this.pages = bookPages; }
+
+        if (ean13 == null) {this.ean13 = "PARAMETER_WAS_NULL";} else { this.ean13 = ean13; }
+
+        this.available = true;
     }
 
     // TODO: Add mutators for other fields, 
@@ -65,9 +74,11 @@ public class Book
      * Called when book is checked out from, or returned to library.
      * @param  status   boolean of "the book is currently being borrowed."
      */
-    public void setBorrow(boolean status)
+    //TODO is it even possible to pass a null parameter?
+    public void setAvailability(boolean status)
     {
-        this.borrowed = status;
+        if(status) { this.available = true; }
+        else { this.available = false; }
     }
 
 // -------------------- accessors --------------------
@@ -112,18 +123,19 @@ public class Book
      * Returns false if book is available for loan, true if it is currently being borrowed.
      * @return false if available, true if on loan.
      */
-    public boolean getBorrowed() { return this.borrowed; }
+    public boolean getAvailable() { return this.available; }
 
     /**
      * Compares keyword parameter with the book's details (title, author name etc.),
      * and returns a boolean true if a match is found, and false if no match is found.
       * @param keyword the keyword to compare with book details.
-     * @return true if keyword matches book details, false if it does not.
+     * @return true if keyword matches book details, false if it does not or if keyword was null.
      */
     public boolean matchDetails(String keyword) {
+
         boolean match = false;
         Iterator<String> it = detailsIterator();
-        while (it.hasNext() && !match) {
+        while (keyword != null && it.hasNext() && !match) {
             if (it.next().toLowerCase().contains(keyword)) {
                 match = true;
             }// if

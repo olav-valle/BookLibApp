@@ -1,44 +1,78 @@
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import static org.junit.jupiter.api.Assertions.*;
+/**
+ * The test class LibraryTest.
+ *
+ * @author  (your name)
+ * @version (a version number or a date)
+ */
+public class LibraryTest
+{
+    private Library library1;
 
-class LibraryTest {
+    /**
+     * Default constructor for test class LibraryTest
+     */
+    public LibraryTest()
+    {
+    }
 
+    /**
+     * Sets up the test fixture.
+     *
+     * Called before every test case method.
+     */
     @BeforeEach
-    void setUp() {
+    public void setUp()
+    {
+        library1 = new Library();
     }
 
+    /**
+     * Tears down the test fixture.
+     *
+     * Called after every test case method.
+     */
     @AfterEach
-    void tearDown() {
+    public void tearDown()
+    {
     }
 
     @Test
-    void addBook() {
+    public void testAddNullBook()
+    {
+        assertFalse(library1.addBook(null));
     }
 
     @Test
-    void findAndRemoveBook() {
+    public void testFindAndRemoveWithNull()
+    {
+        assertFalse(library1.findAndRemoveBook(null));
     }
 
     @Test
-    void searchByKeyword() {
+    public void testSearchByNullKeyword()
+    {
+        assertEquals(0, library1.searchByKeyword(null).size());
+        //assert that search with a null keyword results in empty HashSet being returned
     }
 
     @Test
-    void getCollection() {
-    }
-
-    @Test
-    void getDetailsIterator() {
-    }
-
-    @Test
-    void bookDetails() {
-    }
-
-    @Test
-    void fillLibrary() {
+    public void testGetLibrarySize()
+    {
+        for(int index = 0; index <= 10 ; index++){
+            assertEquals(index, library1.getLibrarySize());
+            library1.addBook(new Book(
+                    "test" + index, "test" + index, "test" + index,
+                    "test" + index, "test" + index, "test" + index));
+                    //new Book
+        }
     }
 }
+
+
+

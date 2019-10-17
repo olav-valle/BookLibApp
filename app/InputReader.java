@@ -9,6 +9,8 @@ import java.util.Arrays;
  * @author     Olav Valle
  * @version    0.2
  */
+
+//TODO How do I test a Scanner?
 public class InputReader
 {
     private Scanner reader;

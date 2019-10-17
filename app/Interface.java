@@ -173,15 +173,19 @@ public class Interface
      * Prints all String objects held in the provided Iterator
      * @param it Iterator<Book> holding objects to print.
      */
-    //TODO test for iterator and/or book in iterator being null
+    //TODO test for book in iterator being null?
+    // Will printBookDetails be eough to handle null in iterator.
+    // No actual method calls are performed on the objects in the iterator in this method
     private void printIterator(Iterator<Book> it)
     {
-        it.forEachRemaining(b -> printBookDetails(b));
+        if (it != null) {
+            it.forEachRemaining(this::printBookDetails);
 
-        System.out.println();
-        System.out.println("###############################");
-        System.out.println("          End of list.");
-        System.out.println("###############################");
+            System.out.println();
+            System.out.println("###############################");
+            System.out.println("          End of list.");
+            System.out.println("###############################");
+        } //if != null
     } //printIterator
 
     /**
@@ -213,8 +217,8 @@ public class Interface
             System.out.println("Date Published:   " + book.getDate());
             System.out.println("Number of pages:  " + book.getPages());
             System.out.println("EAN-13 reference: " + book.getRefNumber());
-            if (book.getBorrowed()) { System.out.println("This book is currently on loan."); }
-            else { System.out.println("This book is available for loan."); }
+            if (book.getAvailable()) { System.out.println("This book is available for loan."); }
+            else { System.out.println("This book is currently not available for loan."); }
         } // if null
     }// printBookDetails
 
