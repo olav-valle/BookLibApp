@@ -36,7 +36,7 @@ public class Library
     public boolean addBook(Book existingBook)
     {
         boolean wasBookAdded;
-        if(existingBook != null){
+        if(existingBook != null){ // change this to == null to test findAndRemove and searchByKeyword with null in collection
             wasBookAdded = this.library.add(existingBook); // Collection.add() returns boolean
         }
         else{
@@ -54,8 +54,12 @@ public class Library
     //TODO what if library contains null object?
     public boolean findAndRemoveBook(String ean13)
     {
-        if(ean13 != null){ return library.removeIf(b -> b.getRefNumber().equals(ean13));}
-        else { return false; }
+        if(ean13 != null) { return library.removeIf(b -> (b != null) && (b.getRefNumber().equals(ean13))); }
+        else { return false; } //returns false if no match was found, or if a null object was found in collection
+
+        // change the addBook method above to test if the (b != null) predicate applies correctly
+        // because of the conditional statement in addBook, null objects should not appear in the collection,
+        // but this safeguards against it anyway.
     }
 
 
@@ -70,7 +74,8 @@ public class Library
         if (keyword != null) { //skips the search stream, and returns the empty HashSet if keyword object was null
             keyword.forEach(word -> // for each word in the keyword set
                     library.stream()
-                           .filter(b -> b.matchDetails(word)) // ask each book if it matches keyword
+                           .filter(b -> (b != null /*should catch null in stream*/)
+                                   && b.matchDetails(word)) // ask each book if it matches keyword
                            .forEach(matchingBooks::add)); // add books that match to the set
         }
         return matchingBooks; // return the set of book objects that match the keyword.
@@ -104,13 +109,13 @@ public class Library
     @SuppressWarnings("SpellCheckingInspection")
     public void fillLibrary()
     {
-        addBook(new Book("The Colour of Magic", "Terry Pratchett", "Corgi", "1985", "285", "9780552124751"));
-        addBook(new Book("The Light Fantastic", "Terry Pratchett", "Corgi", "1986", "241", "9780061020704"));
-        addBook(new Book("A first course in machine learning (Second edition)", "Simon Rogers, Mark Girolami", "CRC Press", "2017", "397","9781498738484"));
-        addBook(new Book("The Shadow of the Torturer", "Gene Wolfe", "Tom Doherty Associates, Inc.", "1982", "262", "9780671540661"));
-        addBook(new Book("Molecular Gastronomy: Exploring the science of Flavor", "Hervé This", "Columbia University Press", "2006", "377", "9780231133128"));
-        addBook(new Book("Les Halles Cookbook", "Anthony Bourdain", "Bloomsbury", "2004", "304", "9780747580126"));
-        addBook(new Book("Larousse Gastronomique", "Prosper Montagné", "Éditions Larousse", "1938", "1087", "9780600620426"));
+        addBook(new Book("The Colour of Magic", "Terry Pratchett", "Corgi", "1985", 285, "9780552124751"));
+        addBook(new Book("The Light Fantastic", "Terry Pratchett", "Corgi", "1986", 241, "9780061020704"));
+        addBook(new Book("A first course in machine learning (Second edition)", "Simon Rogers, Mark Girolami", "CRC Press", "2017", 397,"9781498738484"));
+        addBook(new Book("The Shadow of the Torturer", "Gene Wolfe", "Tom Doherty Associates, Inc.", "1982", 262, "9780671540661"));
+        addBook(new Book("Molecular Gastronomy: Exploring the science of Flavor", "Hervé This", "Columbia University Press", "2006", 377, "9780231133128"));
+        addBook(new Book("Les Halles Cookbook", "Anthony Bourdain", "Bloomsbury", "2004", 304, "9780747580126"));
+        addBook(new Book("Larousse Gastronomique", "Prosper Montagné", "Éditions Larousse", "1938", 1087, "9780600620426"));
     }
 
 }

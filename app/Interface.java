@@ -87,7 +87,7 @@ public class Interface
         String date = reader.getStringInput();
 
         System.out.println("Number of pages: ");
-        String pages = reader.getStringInput();
+        int pages = reader.getIntInput();
 
         System.out.println("EAN-13 reference number: ");
         String ean13 = reader.getStringInput();

@@ -23,7 +23,7 @@ public class BookTest
     public void setUp()
     {
        testBook = new Book("Title", "Author", "Publisher",
-               "Date", "Pages", "EAN-13");
+               "Date", 100, "EAN-13");
     }
 
     /**
@@ -33,13 +33,13 @@ public class BookTest
     public void newBookWithOneNullParameter()
     {
         Book nullTitleBook = new Book(null, "Author", "Publisher",
-                "Date", "Pages", "EAN-13");
+                "Date", 100, "EAN-13");
 
         assertEquals("PARAMETER_WAS_NULL", nullTitleBook.getTitle()); // should have been set to default value
         assertEquals("Author", nullTitleBook.getAuthorName());
         assertEquals("Publisher", nullTitleBook.getPublisher());
         assertEquals("Date", nullTitleBook.getDate());
-        assertEquals("Pages", nullTitleBook.getPages());
+        assertEquals("100", nullTitleBook.getPages());
         assertEquals("EAN-13", nullTitleBook.getRefNumber());
     }
 
@@ -47,14 +47,14 @@ public class BookTest
      * Asserts that all fields are correctly initialized to default value if the constructor is passed only null parameters.
      */
     @Test
-    public void newBookWithNullParameters()
+    public void newBookWithNullParametersAndNegativePages()
     {
         Book nullBook = new Book(null, null, null,
-                null, null, null);
+                null, -100, null);
 
         assertEquals("PARAMETER_WAS_NULL", nullBook.getAuthorName());
         assertEquals("PARAMETER_WAS_NULL", nullBook.getDate());
-        assertEquals("PARAMETER_WAS_NULL", nullBook.getPages());
+        assertEquals("PARAMETER_WAS_NEGATIVE_INT", nullBook.getPages());
         assertEquals("PARAMETER_WAS_NULL", nullBook.getTitle());
         assertEquals("PARAMETER_WAS_NULL", nullBook.getPublisher());
         assertEquals("PARAMETER_WAS_NULL", nullBook.getRefNumber());
@@ -69,7 +69,7 @@ public class BookTest
         assertEquals("Author", testBook.getAuthorName());
         assertEquals("Publisher", testBook.getPublisher());
         assertEquals("Date", testBook.getDate());
-        assertEquals("Pages", testBook.getPages());
+        assertEquals("100", testBook.getPages());
         assertEquals("EAN-13", testBook.getRefNumber());
         assertTrue(testBook.getAvailable()); //asserts that the "available" field was initialized to true
     }
@@ -91,7 +91,7 @@ public class BookTest
         assertTrue(testBook.matchDetails("Author"));
         assertTrue(testBook.matchDetails("Publisher"));
         assertTrue(testBook.matchDetails("Date"));
-        assertTrue(testBook.matchDetails("Pages"));
+        assertTrue(testBook.matchDetails("100"));
         assertTrue(testBook.matchDetails("EAN-13"));
     }
 

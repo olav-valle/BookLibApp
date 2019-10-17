@@ -47,7 +47,7 @@ public class Book
 
     public Book(String bookTitle, String bookAuthor, 
                 String bookPublisher, String publishingDate, 
-                String bookPages, String ean13)
+                int bookPages, String ean13)
     {
 
         if (bookTitle == null) {this.title = "PARAMETER_WAS_NULL";} else { this.title = bookTitle; }
@@ -58,7 +58,8 @@ public class Book
 
         if (publishingDate == null) {this.date = "PARAMETER_WAS_NULL";} else { this.date = publishingDate; }
 
-        if (bookPages == null) {this.pages = "PARAMETER_WAS_NULL";} else { this.pages = bookPages; }
+        if(bookPages < 0) {this.pages = "PARAMETER_WAS_NEGATIVE_INT";} // checks if page number is non-negative
+        else { this.pages = Integer.toString(bookPages); }
 
         if (ean13 == null) {this.ean13 = "PARAMETER_WAS_NULL";} else { this.ean13 = ean13; }
 
@@ -149,6 +150,8 @@ public class Book
      */
     private Iterator<String> detailsIterator()
     {
-        return List.of(title, authorName, publisher, date, pages, ean13).iterator();
+        int page = 100;
+        Integer.toString(page);
+    return List.of(title, authorName, publisher, date, pages, ean13).iterator();
     }
 }// class Book
