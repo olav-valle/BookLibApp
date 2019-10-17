@@ -1,8 +1,10 @@
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+
+import java.util.Iterator;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The test class LibraryTest.
@@ -57,13 +59,14 @@ public class LibraryTest
     @Test
     public void testSearchByNullKeyword()
     {
-        assertEquals(0, library1.searchByKeyword(null).size());
         //assert that search with a null keyword results in empty HashSet being returned
+        assertEquals(0, library1.searchByKeyword(null).size());
     }
 
     @Test
     public void testGetLibrarySize()
     {
+        //adds books to library and asserts that library size increases accordingly
         for(int index = 0; index <= 10 ; index++){
             assertEquals(index, library1.getLibrarySize());
             library1.addBook(new Book(
@@ -71,6 +74,16 @@ public class LibraryTest
                     "test" + index, "test" + index, "test" + index));
                     //new Book
         }
+    }
+    @Test
+    public void testGetLibraryIterator()
+    {
+        //TODO find a way to test this method. Some way to assert the type of the object it returns?
+        assertFalse(library1.getLibraryIterator().hasNext()); //assert that iterator of empty library is also empty
+        library1.addBook(new Book(
+                "test", "test", "test",
+                "test", "test", "test")); // add a book to library
+        assertTrue(library1.getLibraryIterator().hasNext()); // assert that iterator now hasNext
     }
 }
 

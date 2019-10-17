@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AppMainTest {
 
+    Interface app;
+
     @BeforeEach
     void setUp() {
     }
@@ -16,5 +18,7 @@ class AppMainTest {
 
     @Test
     void main() {
+        app = new Interface();
+        assert(app instanceof Interface);
     }
 }

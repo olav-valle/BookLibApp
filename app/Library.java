@@ -91,6 +91,7 @@ public class Library
      * Returns Iterator holding description strings for objects in collection.
      * @return Iterator holding descriptions of all books in collection.
      */
+    //TODO how do I test this?
     public Iterator<Book> getLibraryIterator()
     {
         return library.iterator();

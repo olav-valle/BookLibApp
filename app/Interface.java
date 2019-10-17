@@ -31,6 +31,7 @@ public class Interface
     /**
      * The user interface method.
      */
+    //TODO how do I test this?
     public void init()
     {
         boolean exit = false;
@@ -141,6 +142,8 @@ public class Interface
         System.out.print("Search: ");
 
         HashSet<String> userInput = reader.getStringInputAsSet();
+
+        //TODO add null check on received collection?
         Iterator<Book> it = library.searchByKeyword(userInput).iterator();
 
         if(it.hasNext()){ // if iterator has objects, we assume the search had matches
@@ -174,7 +177,7 @@ public class Interface
      * @param it Iterator<Book> holding objects to print.
      */
     //TODO test for book in iterator being null?
-    // Will printBookDetails be eough to handle null in iterator.
+    // Will printBookDetails be enough to handle null in iterator.
     // No actual method calls are performed on the objects in the iterator in this method
     private void printIterator(Iterator<Book> it)
     {

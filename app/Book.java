@@ -72,13 +72,12 @@ public class Book
     /**
      * Set borrowed status as boolean value.
      * Called when book is checked out from, or returned to library.
-     * @param  status   boolean of "the book is currently being borrowed."
+     * @param  status true to set book as "available for loan", false to set book as "not available for loan"
      */
     //TODO is it even possible to pass a null parameter?
     public void setAvailability(boolean status)
     {
-        if(status) { this.available = true; }
-        else { this.available = false; }
+        this.available = status;
     }
 
 // -------------------- accessors --------------------
