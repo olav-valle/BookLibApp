@@ -13,18 +13,25 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author  Olav Valle
  * @version 2019/10/17
  */
-public class LibraryTest
-{
+@SuppressWarnings("ConstantConditions")
+public class LibraryTest {
     private Library library1;
 
-    public LibraryTest()
-    {
+    public LibraryTest() {
     }
 
     @BeforeEach
-    public void setUp()
-    {
+    public void setUp() {
         library1 = new Library();
+    }
+
+    /**
+     * Asserts that the object created with "new Library();" is of the Library type.
+     */
+    @Test
+    public void testLibraryConstructor()
+    {
+        assertTrue(library1 instanceof Library);
     }
 
     /**
@@ -61,6 +68,9 @@ public class LibraryTest
         //TODO assert that correct book was removed?
     }
 
+    /**
+     * Assert that a search with null as keyword is handled, and returns no matches.
+     */
     @Test
     public void testSearchByNullKeyword()
     {
@@ -68,6 +78,9 @@ public class LibraryTest
         assertEquals(0, library1.searchByKeyword(null).size());
     }
 
+    /**
+     * Assert that library size is correctly reported as library collection grows.
+     */
     @Test
     public void testGetLibrarySize()
     {
@@ -80,17 +93,24 @@ public class LibraryTest
                     //new Book
         }
     }
+
+    /**
+     * Assert that the iterator returned by library is initially empty,
+     * and that this iterator is changed when books are added to collection.
+     */
     @Test
     public void testGetLibraryIterator()
     {
-        //TODO find a way to test this method. Some way to assert the type of the object it returns?
         assertFalse(library1.getLibraryIterator().hasNext()); //assert that iterator of empty library is also empty
         library1.addBook(new Book(
                 "test", "test", "test",
                 "test", 100, "test")); // add a book to library
-        assertTrue(library1.getLibraryIterator().hasNext()); // assert that iterator now hasNext
+        assertTrue(library1.getLibraryIterator().hasNext()); // assert that iterator was updated to reflect change in library
     }
 
+    /**
+     * Unused test, can be used to assert that findAndRemove handles null objects in collection correctly
+     */
     @Test
     public void testRemoveBookWithNullInLibrary()
     {
@@ -104,6 +124,9 @@ public class LibraryTest
         // should then assert to false, since the first book it finds in lib is null
     }
 
+    /**
+     * Unused test, can be used to assert that searchByKeyword handles null objects in collection correctly
+     */
     @Test
     public void testSearchByKeywordWithNullInLibrary()
     {
