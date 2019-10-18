@@ -44,7 +44,8 @@ public class BookTest
     }
 
     /**
-     * Asserts that all fields are correctly initialized to default value if the constructor is passed only null parameters.
+     * Asserts that all fields are correctly initialized to default value
+     * if the constructor is passed only invalid (null and/or negative int) parameters.
      */
     @Test
     public void newBookWithNullParametersAndNegativePages()
@@ -104,11 +105,19 @@ public class BookTest
         assertFalse(testBook.matchDetails(null));
     }
 
+    /**
+     * Asserts that setAvailability sets field to value of parameter
+     */
     @Test
     public void setAvailabilityToFalse()
     {
-        testBook.setAvailability(false);
-        assertFalse(testBook.getAvailable());
+        assertTrue(testBook.getAvailable()); //field is initialized to true in constructor
+
+        testBook.setAvailability(false); //set to false
+        assertFalse(testBook.getAvailable()); //assert that field has changed value
+
+        testBook.setAvailability(true);//set back to true
+        assertTrue(testBook.getAvailable());//assert that field has been changed back to true
     }
 
 }

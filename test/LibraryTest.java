@@ -101,11 +101,13 @@ public class LibraryTest {
     @Test
     public void testGetLibraryIterator()
     {
-        assertFalse(library1.getLibraryIterator().hasNext()); //assert that iterator of empty library is also empty
+        assertFalse(library1.getLibraryIterator().hasNext());
+        //assert that iterator of empty library is also empty
         library1.addBook(new Book(
                 "test", "test", "test",
                 "test", 100, "test")); // add a book to library
-        assertTrue(library1.getLibraryIterator().hasNext()); // assert that iterator was updated to reflect change in library
+        assertTrue(library1.getLibraryIterator().hasNext());
+        // assert that iterator was updated to reflect change in library
     }
 
     /**
@@ -130,11 +132,15 @@ public class LibraryTest {
     @Test
     public void testSearchByKeywordWithNullInLibrary()
     {
-        HashSet<String> keyword = new HashSet<>(); // searchByKeyword expects HashSet<String> as parameter
+        HashSet<String> keyword = new HashSet<>();
+        // searchByKeyword expects HashSet<String> as parameter
+
         keyword.add("test"); // fill keyword HashSet for test
 
         Library lib = new Library(); // new library instance
+
         lib.addBook(null); //add null element to library
+
         lib.addBook(new Book("test", "test", "test", "test",
                 100, "test")); // add a book that should give a match for keyword
 

@@ -50,38 +50,44 @@ public class Book
                 int bookPages, String ean13)
     {
 
-        if (bookTitle == null) {this.title = "PARAMETER_WAS_NULL";} else { this.title = bookTitle; }
+        if (bookTitle == null) {this.title = "PARAMETER_WAS_NULL";}
+        else { this.title = bookTitle; }
 
-        if (bookAuthor == null) {this.authorName = "PARAMETER_WAS_NULL";} else { this.authorName = bookAuthor; }
+        if (bookAuthor == null) {this.authorName = "PARAMETER_WAS_NULL";}
+        else { this.authorName = bookAuthor; }
 
-        if (bookPublisher == null) {this.publisher = "PARAMETER_WAS_NULL";} else { this.publisher = bookPublisher; }
+        if (bookPublisher == null) {this.publisher = "PARAMETER_WAS_NULL";}
+        else { this.publisher = bookPublisher; }
 
-        if (publishingDate == null) {this.date = "PARAMETER_WAS_NULL";} else { this.date = publishingDate; }
+        if (publishingDate == null) {this.date = "PARAMETER_WAS_NULL";}
+        else { this.date = publishingDate; }
 
-        if(bookPages < 0) {this.pages = "PARAMETER_WAS_NEGATIVE_INT";} // checks if page number is non-negative
+        if(bookPages < 0) {this.pages = "PARAMETER_WAS_NEGATIVE_INT";}
+        // checks if page number is non-negative
         else { this.pages = Integer.toString(bookPages); }
 
-        if (ean13 == null) {this.ean13 = "PARAMETER_WAS_NULL";} else { this.ean13 = ean13; }
+        if (ean13 == null) {this.ean13 = "PARAMETER_WAS_NULL";}
+        else { this.ean13 = ean13; }
 
         this.available = true;
     }
 
+// -------------------- mutator --------------------
     // TODO: Add mutator for other fields,
     // e.g. in case original entry was misspelled?
 
-// -------------------- mutator --------------------
 
     /**
      * Set borrowed status as boolean value.
      * Called when book is checked out from, or returned to library.
      * @param  status true to set book as "available for loan", false to set book as "not available for loan"
      */
-    //TODO is it even possible to pass a null parameter?
     public void setAvailability(boolean status)
     {
         this.available = status;
-    }
+        //TODO is it even possible to pass a null parameter?
 
+    }
 // -------------------- accessors --------------------
 
     /**
@@ -132,15 +138,17 @@ public class Book
       * @param keyword the keyword to compare with book details.
      * @return true if keyword matches book details, false if it does not or if keyword was null.
      */
-    public boolean matchDetails(String keyword) {
-
+    public boolean matchDetails(String keyword)
+    {
         boolean match = false;
         Iterator<String> it = detailsIterator();
+
         while (keyword != null && it.hasNext() && !match) {
             if (it.next().toLowerCase().contains(keyword.toLowerCase())) {
                 match = true;
             }// if
         }// while
+
         return match;
     }
 
@@ -150,8 +158,6 @@ public class Book
      */
     private Iterator<String> detailsIterator()
     {
-        int page = 100;
-        Integer.toString(page);
-    return List.of(title, authorName, publisher, date, pages, ean13).iterator();
+        return List.of(title, authorName, publisher, date, pages, ean13).iterator();
     }
 }// class Book

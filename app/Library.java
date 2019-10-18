@@ -55,10 +55,12 @@ public class Library
     public boolean findAndRemoveBook(String ean13)
     {
         if(ean13 != null) { return library.removeIf(b -> (b != null) && (b.getRefNumber().equals(ean13))); }
-        else { return false; } //returns false if no match was found, or if a null object was found in collection
+        else { return false; }
+        //returns false if no match was found, or if a null object was found in collection
 
-        // change the addBook method above to test if the (b != null) predicate applies correctly
-        // because of the conditional statement in addBook, null objects should not appear in the collection,
+        // change the addBook in this class to test if the (b != null) predicate applies correctly
+        // because of the conditional statement in addBook,
+        // null objects should not appear in the collection,
         // but this safeguards against it anyway.
     }
 
