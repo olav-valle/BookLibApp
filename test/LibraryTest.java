@@ -1,9 +1,7 @@
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
-import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author  Olav Valle
  * @version 2019/10/17
  */
-@SuppressWarnings("ConstantConditions")
+@SuppressWarnings({"ConstantConditions", "WeakerAccess"})
 public class LibraryTest {
     private Library library1;
 
@@ -62,9 +60,14 @@ public class LibraryTest {
                 "",100,"1234567891011")); //add book with known EAN13
         library1.addBook(new Book("","","",
                 "",100,"1234567891010")); // almost identical EAN13
+
         assertEquals(2, library1.getLibrarySize()); // two books in library
-        assertTrue(library1.findAndRemoveBook("1234567891011")); //assert that removing the above book succeeds
-        assertEquals(1, library1.getLibrarySize()); // only one book has been removed
+        assertTrue(library1.findAndRemoveBook("1234567891011"));
+        //assert that removing the above book succeeds
+
+        assertEquals(1, library1.getLibrarySize()); // only one book remains
+        assertEquals("1234567891010", library1.getLibraryIterator().next().getRefNumber());
+        //assert that the book that remains is the one that should not have been removed
         //TODO assert that correct book was removed?
     }
 

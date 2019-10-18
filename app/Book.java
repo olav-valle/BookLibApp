@@ -140,16 +140,18 @@ public class Book
      */
     public boolean matchDetails(String keyword)
     {
-        boolean match = false;
-        Iterator<String> it = detailsIterator();
+        boolean isMatch = false; //assume book is not a match until we have checked
+        Iterator<String> it = detailsIterator(); //iterator of field values
 
-        while (keyword != null && it.hasNext() && !match) {
+        while (keyword != null && it.hasNext() && !isMatch) {
+        //while keyword is valid, and more fields are available, and no match has been found.
             if (it.next().toLowerCase().contains(keyword.toLowerCase())) {
-                match = true;
+            //does the field contain the keyword?
+                isMatch = true;
             }// if
         }// while
 
-        return match;
+        return isMatch;
     }
 
     /**

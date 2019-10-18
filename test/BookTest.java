@@ -30,7 +30,7 @@ public class BookTest
      * Assert that the other fields in the object are correctly created, even if one parameter is null
      */
     @Test
-    public void newBookWithOneNullParameter()
+    public void testNewBookWithOneNullParameter()
     {
         Book nullTitleBook = new Book(null, "Author", "Publisher",
                 "Date", 100, "EAN-13");
@@ -48,7 +48,7 @@ public class BookTest
      * if the constructor is passed only invalid (null and/or negative int) parameters.
      */
     @Test
-    public void newBookWithNullParametersAndNegativePages()
+    public void testNewBookWithNullParametersAndNegativePages()
     {
         Book nullBook = new Book(null, null, null,
                 null, -100, null);
@@ -65,7 +65,7 @@ public class BookTest
      * Asserts that all getters return the field values initialized in setUp
      */
     @Test
-    void testAllGetMethods() {
+    public void testAllGetMethods() {
         assertEquals("Title", testBook.getTitle());
         assertEquals("Author", testBook.getAuthorName());
         assertEquals("Publisher", testBook.getPublisher());
@@ -79,7 +79,7 @@ public class BookTest
      * Asserts that a book will not find false positives for a keyword its fields do not contain.
      */
     @Test
-    void matchDetailsFalse() {
+    public void testMatchDetailsFalse() {
         assertFalse(testBook.matchDetails("test"));
     }
 
@@ -87,7 +87,7 @@ public class BookTest
      * Asserts that a book will find matches for keywords in all its String fields.
      */
     @Test
-    void matchDetailsTrue() {
+    public void testMatchDetailsTrue() {
         assertTrue(testBook.matchDetails("Title"));
         assertTrue(testBook.matchDetails("Author"));
         assertTrue(testBook.matchDetails("Publisher"));
@@ -100,7 +100,7 @@ public class BookTest
      * Asserts that a book will not find a false positive if keyword parameter is null.
      */
     @Test
-    public void matchDetailsWithNullKeyword()
+    public void testMatchDetailsWithNullKeyword()
     {
         assertFalse(testBook.matchDetails(null));
     }
@@ -109,7 +109,7 @@ public class BookTest
      * Asserts that setAvailability sets field to value of parameter
      */
     @Test
-    public void setAvailabilityToFalse()
+    public void testSetAvailabilityToFalse()
     {
         assertTrue(testBook.getAvailable()); //field is initialized to true in constructor
 
