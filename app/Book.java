@@ -10,12 +10,12 @@ import java.util.List;
 @SuppressWarnings("WeakerAccess")
 public class Book
 {
-    private String title;
-    private String authorName;
-    private String publisher;
-    private String date;
-    private String pages;
-    private String ean13;
+    private final String title;
+    private final String authorName;
+    private final String publisher;
+    private final String date;
+    private final String pages;
+    private final String ean13;
     // using String for EAN-13 for now.
     // possible to change to Long, for arithmetic
     // TODO: find and implement an EAN-13 generator class?
@@ -88,7 +88,13 @@ public class Book
         //TODO is it even possible to pass a null parameter?
 
     }
+
 // -------------------- accessors --------------------
+    /**
+     * Returns false if book is available for loan, true if it is currently being borrowed.
+     * @return false if available, true if on loan.
+     */
+    public boolean getAvailable() { return this.available; }
 
     /**
      * Returns book title.
@@ -125,12 +131,6 @@ public class Book
      * @return EAN-13 reference number.
      */
     public String getRefNumber() { return this.ean13; }
-
-    /**
-     * Returns false if book is available for loan, true if it is currently being borrowed.
-     * @return false if available, true if on loan.
-     */
-    public boolean getAvailable() { return this.available; }
 
     /**
      * Compares keyword parameter with the book's details (title, author name etc.),

@@ -62,6 +62,8 @@ public class Interface
                     printFarewell();
                     exit = true;
                     break;
+                default:
+                    printInputError();
             }
 
         }
@@ -176,8 +178,9 @@ public class Interface
      * @param it Iterator<Book> holding objects to print.
      */
     //TODO test for book in iterator being null?
-    // Will printBookDetails be enough to handle null in iterator.
-    // No actual method calls are performed on the objects in the iterator in this method
+    // Will printBookDetails be enough to handle null in iterator?
+    // No actual method calls are performed on the objects in the iterator,
+    // so there is no risk of calling method on a null, if the iterator does contain one
     private void printIterator(Iterator<Book> it)
     {
         if (it != null) {
