@@ -32,7 +32,7 @@ public class BookTest
     {
         Book nullTitleBook = new Book(null, "Author", "Publisher",
                 "Date", 100, "EAN-13");
-        "PARAMETER_WAS_NULL"
+
         assertEquals("PARAMETER_WAS_NULL", nullTitleBook.getTitle()); // should have been set to default value
         assertEquals("Author", nullTitleBook.getAuthorName());
         assertEquals("Publisher", nullTitleBook.getPublisher());
@@ -184,18 +184,19 @@ public class BookTest
     }
 
     /**
-     * Asserts that setAvailability sets field to value of parameter
+     * Assert that the book allows being borrowed if it is available, but not if it is unavailable.
      */
     @Test
-    public void testSetAvailabilityToFalse()
+    public void testBorrowBook()
     {
-        assertTrue(testBook.getAvailable()); //field is initialized to true in constructor
-
-        testBook.setAvailability(false); //set to false
-        assertFalse(testBook.getAvailable()); //assert that field has changed value
-
-        testBook.setAvailability(true);//set back to true
-        assertTrue(testBook.getAvailable());//assert that field has been changed back to true
+        assertEquals(testBook.getAvailable(), testBook.borrowBook());
+        //assert that book starts available for loan
+        assertFalse(testBook.borrowBook());
+        //assert that book is already being borrowed
+        assertTrue(testBook.returnBook());
+        //attempt to return book that is borrowed
+        assertFalse(testBook.returnBook());
+        //attempt to return book that is not borrowed
     }
 
 }

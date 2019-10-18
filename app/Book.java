@@ -83,17 +83,45 @@ public class Book
      * Called when book is checked out from, or returned to library.
      * @param  status true to set book as "available for loan", false to set book as "not available for loan"
      */
-    public void setAvailability(boolean status)
+    private void setAvailability(boolean status)
     {
         this.available = status;
         //TODO is it even possible to pass a null parameter?
+    }
 
+    /**
+     * Ask to borrow the book, and change its status accordingly.
+     * @return true if book was successfully borrowed, false if book is already on loan.
+     */
+    public boolean borrowBook()
+    {
+        boolean borrowSuccess = false;
+        if(available) {
+            setAvailability(false);
+            borrowSuccess = true;
+        }
+        return borrowSuccess;
+    }
+
+    /**
+     * Returns the book to the library if it was currently on loan, setting its status to available.
+     * Attempting to return a book that is not currently on loan will not succeed.
+     * @return true if book was successfully returned to library, false if book was not being borrowed.
+     */
+    public boolean returnBook()
+    {
+        boolean returnSuccess = false;
+        if(!available){
+            setAvailability(true);
+            returnSuccess = true;
+        }
+        return returnSuccess;
     }
 
 // -------------------- accessors --------------------
     /**
-     * Returns false if book is available for loan, true if it is currently being borrowed.
-     * @return false if available, true if on loan.
+     * Returns true if book is available for loan, false if it is currently being borrowed.
+     * @return true if available, false if on loan.
      */
     public boolean getAvailable() { return this.available; }
 

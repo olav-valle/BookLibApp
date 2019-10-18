@@ -47,8 +47,8 @@ public class InputReader
      */
     public String getStringInput()
     {
-	System.out.print("> ");         // print prompt
-	return reader.nextLine();
+	    System.out.print("> ");         // print prompt
+	    return reader.nextLine();
     }
 
     /**

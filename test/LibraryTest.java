@@ -114,7 +114,7 @@ public class LibraryTest {
     }
 
     /**
-     * Unused test, can be used to assert that findAndRemove handles null objects in collection correctly
+     * Unused test, can be used to assert that findAndRemove handles null in collection correctly
      */
     @Test
     public void testRemoveBookWithNullInLibrary()
@@ -130,7 +130,7 @@ public class LibraryTest {
     }
 
     /**
-     * Unused test, can be used to assert that searchByKeyword handles null objects in collection correctly
+     * Unused test, can be used to assert that searchByKeyword handles null in collection correctly
      */
     @Test
     public void testSearchByKeywordWithNullInLibrary()

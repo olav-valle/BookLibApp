@@ -33,9 +33,11 @@ public class Library
      * @param existingBook a Book type object
      * @return boolean true if book was successfully added to collection, false if it failed (or if parameter was null)
      */
+    @SuppressWarnings("ConstantConditions")
     public boolean addBook(Book existingBook)
     {
-        boolean wasBookAdded;
+        @SuppressWarnings("UnusedAssignment") boolean wasBookAdded = true;
+
         if(existingBook != null){ // change this to == null to test findAndRemove and searchByKeyword with null in collection
             wasBookAdded = this.library.add(existingBook); // Collection.add() returns boolean
         }
