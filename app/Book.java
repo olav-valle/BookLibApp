@@ -21,7 +21,8 @@ public class Book
     // TODO: find and implement an EAN-13 generator class?
     private boolean available;
 
-
+//TODO implement borrow request method with success return boolean
+//TODO
     /**
      * Book object constructor.
      * User inputs relevant information.

@@ -1,7 +1,5 @@
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -27,14 +25,14 @@ public class BookTest
     }
 
     /**
-     * Assert that the other fields in the object are correctly created, even if one parameter is null
+     * Assert that the other fields in the object are correctly created if title is null.
      */
     @Test
-    public void testNewBookWithOneNullParameter()
+    public void testNewBookWithNullTitle()
     {
         Book nullTitleBook = new Book(null, "Author", "Publisher",
                 "Date", 100, "EAN-13");
-
+        "PARAMETER_WAS_NULL"
         assertEquals("PARAMETER_WAS_NULL", nullTitleBook.getTitle()); // should have been set to default value
         assertEquals("Author", nullTitleBook.getAuthorName());
         assertEquals("Publisher", nullTitleBook.getPublisher());
@@ -42,7 +40,87 @@ public class BookTest
         assertEquals("100", nullTitleBook.getPages());
         assertEquals("EAN-13", nullTitleBook.getRefNumber());
     }
+    /**
+     * Assert that the other fields in the object are correctly created if author is null.
+     */
+    @Test
+    public void testNewBookWithNullAuthor()
+    {
 
+        Book nullAuthorBook = new Book("Title", null, "Publisher",
+                "Date", 100, "EAN-13");
+
+        assertEquals("Title", nullAuthorBook.getTitle());
+        assertEquals("PARAMETER_WAS_NULL", nullAuthorBook.getAuthorName());// should have been set to default value
+        assertEquals("Publisher", nullAuthorBook.getPublisher());
+        assertEquals("Date", nullAuthorBook.getDate());
+        assertEquals("100", nullAuthorBook.getPages());
+        assertEquals("EAN-13", nullAuthorBook.getRefNumber());
+    }
+    /**
+     * Assert that the other fields in the object are correctly created if publisher is null.
+     */
+    @Test
+    public void testNewBookWithNullPublisher()
+    {
+        Book nullPublisherBook = new Book("Title", "Author", null,
+                "Date", 100, "EAN-13");
+
+        assertEquals("Title", nullPublisherBook.getTitle());
+        assertEquals("Author", nullPublisherBook.getAuthorName());
+        assertEquals("PARAMETER_WAS_NULL", nullPublisherBook.getPublisher());// should have been set to default value
+        assertEquals("Date", nullPublisherBook.getDate());
+        assertEquals("100", nullPublisherBook.getPages());
+        assertEquals("EAN-13", nullPublisherBook.getRefNumber());
+    }
+    /**
+     * Assert that the other fields in the object are correctly created if date is null.
+     */
+    @Test
+    public void testNewBookWithNullDate()
+    {
+        Book nullDateBook = new Book("Title", "Author", "Publisher",
+                null, 100, "EAN-13");
+
+        assertEquals("Title", nullDateBook.getTitle());
+        assertEquals("Author", nullDateBook.getAuthorName());
+        assertEquals("Publisher", nullDateBook.getPublisher());
+        assertEquals("PARAMETER_WAS_NULL", nullDateBook.getDate());// should have been set to default value
+        assertEquals("100", nullDateBook.getPages());
+        assertEquals("EAN-13", nullDateBook.getRefNumber());
+    }
+    /**
+     * Assert that the other fields in the object are correctly created if page int is negative.
+     */
+    @Test
+    public void testNewBookWithNegativePageInt()
+    {
+        Book negativePageIntBook = new Book("Title", "Author", "Publisher",
+                "Date", -100, "EAN-13");
+
+        assertEquals("Title", negativePageIntBook.getTitle());
+        assertEquals("Author", negativePageIntBook.getAuthorName());
+        assertEquals("Publisher", negativePageIntBook.getPublisher());
+        assertEquals("Date", negativePageIntBook.getDate());
+        assertEquals("PARAMETER_WAS_NEGATIVE_INT", negativePageIntBook.getPages());// should have been set to default value
+        assertEquals("EAN-13", negativePageIntBook.getRefNumber());
+    }
+    /**
+     * Assert that the other fields in the object are correctly created if EAN-13 is null.
+     */
+    @Test
+    public void testNewBookWithNullEAN13()
+    {
+        Book nullEAN13Book = new Book("Title", "Author", "Publisher",
+                "Date", 100, null);
+
+        assertEquals("Title", nullEAN13Book.getTitle());
+        assertEquals("Author", nullEAN13Book.getAuthorName());
+        assertEquals("Publisher", nullEAN13Book.getPublisher());
+        assertEquals("Date", nullEAN13Book.getDate());
+        assertEquals("100", nullEAN13Book.getPages());
+        assertEquals("PARAMETER_WAS_NULL", nullEAN13Book.getRefNumber());// should have been set to default value
+    }
     /**
      * Asserts that all fields are correctly initialized to default value
      * if the constructor is passed only invalid (null and/or negative int) parameters.
