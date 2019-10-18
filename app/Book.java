@@ -45,7 +45,10 @@ public class Book
      * @param bookPages Number of pages in book.
      * @param ean13 EAN-13 reference number.
      */
-
+    //TODO add counter for the number of copies of the book the library holds.
+    //TODO change EAN-13 to long
+    //TODO change page and date to int
+    //TODO add counter for number of books available/unavailable for loan
     public Book(String bookTitle, String bookAuthor, 
                 String bookPublisher, String publishingDate, 
                 int bookPages, String ean13)
@@ -110,7 +113,7 @@ public class Book
      */
     public boolean returnBook()
     {
-        boolean returnSuccess = false;
+        boolean returnSuccess = false; //default is false because book is constructed as available
         if(!available){
             setAvailability(true);
             returnSuccess = true;
