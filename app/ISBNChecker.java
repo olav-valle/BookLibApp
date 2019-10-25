@@ -62,6 +62,11 @@ public class ISBNChecker {
             valid = (isbnAsInt.get(9) == calculateISBN10CheckDigit(isbnAsInt));
         //TODO implement ISBN-10 check digit algorithm
         }
+        else if (isbnAsInt.size() == 9) {
+            isbnAsInt.add(0, 0);
+            // prefix a 9 digit ISBN with 0 to make ISBN-10
+            valid = (isbnAsInt.get(9) == calculateISBN10CheckDigit(isbnAsInt));
+        }
 
         return valid;
     }
@@ -99,8 +104,6 @@ public class ISBNChecker {
     public int calculateISBN10CheckDigit(ArrayList<Integer> isbn10Ints)
     {
         int sum = 0;
-
-
         for(int i = 0; i < 9; i++){
             sum += ((10-i) * isbn10Ints.get(i));
         }
