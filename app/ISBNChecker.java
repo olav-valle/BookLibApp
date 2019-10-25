@@ -55,17 +55,16 @@ public class ISBNChecker {
 
         ArrayList<Integer> isbnAsInt = ISBNLongToIntArrayList(isbn);
 
-        if(isbnAsInt.size() == 13) {
+        if(isbnAsInt.size() == 13) { //if ISBN is 13 digit
             valid = (isbnAsInt.get(12) == calculateISBN13CheckDigit(isbnAsInt));
         }
-        else if(isbnAsInt.size() == 10) {
+        else if(isbnAsInt.size() == 10) { //if ISBN is 10 digit
             valid = (isbnAsInt.get(9) == calculateISBN10CheckDigit(isbnAsInt));
-        //TODO implement ISBN-10 check digit algorithm
         }
-        else if (isbnAsInt.size() == 9) {
+        else if (isbnAsInt.size() == 9) { //if ISBN is 9 digit
             isbnAsInt.add(0, 0);
             // prefix a 9 digit ISBN with 0 to make ISBN-10
-            valid = (isbnAsInt.get(9) == calculateISBN10CheckDigit(isbnAsInt));
+            valid = (isbnAsInt.get(9) == calculateISBN10CheckDigit(isbnAsInt)); //check it using ISBN-10 checker
         }
 
         return valid;
@@ -77,7 +76,7 @@ public class ISBNChecker {
      * @param longNumber A number of primitive type long.
      * @return An ArrayList collecting the individual integer digits of longNumber.
      */
-    public ArrayList<Integer> ISBNLongToIntArrayList(long longNumber) {
+    private ArrayList<Integer> ISBNLongToIntArrayList(long longNumber) {
         return Arrays.stream(Long.toString(longNumber)
                 .split("")).map(Integer::parseInt)
                 .collect(Collectors.toCollection(ArrayList::new));
@@ -91,9 +90,8 @@ public class ISBNChecker {
      */
     private int calculateISBN13CheckDigit(ArrayList<Integer> isbn13Ints)
     {
-        int checkDigit13 = (10 - ((isbn13Ints.get(0) + 3 * isbn13Ints.get(1) + isbn13Ints.get(2) + 3 * isbn13Ints.get(3) + isbn13Ints.get(4) + 3 * isbn13Ints.get(5)
+        return (10 - ((isbn13Ints.get(0) + 3 * isbn13Ints.get(1) + isbn13Ints.get(2) + 3 * isbn13Ints.get(3) + isbn13Ints.get(4) + 3 * isbn13Ints.get(5)
                 + isbn13Ints.get(6) + 3 * isbn13Ints.get(7) + isbn13Ints.get(8) + 3 * isbn13Ints.get(9) + isbn13Ints.get(10) + 3 * isbn13Ints.get(11))) % 10);
-        return checkDigit13;
     }
 
     /**
@@ -101,7 +99,7 @@ public class ISBNChecker {
      * @param isbn10Ints An array of the first 9 digits in the
      * @return The calculated check digit.
      */
-    public int calculateISBN10CheckDigit(ArrayList<Integer> isbn10Ints)
+    private int calculateISBN10CheckDigit(ArrayList<Integer> isbn10Ints)
     {
         int sum = 0;
         for(int i = 0; i < 9; i++){
